@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Two-Way Conversion</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        #micButton {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            transition: all 0.3s;
+        }
+        #micButton.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        #transcript {
+            min-height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            background-color: #f9f9f9;
+            outline: none;
+        }
+        #transcript:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+        #stopButton {
+            background-color: #f44336;
+        }
+        #stopButton:hover:not(:disabled) {
+            background-color: #d32f2f;
+        }
+        .status {
+            margin: 10px 0;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speech Two-Way Conversion</h1>
+        
+        <button id="micButton" title="Click to start/stop recording">🎤</button>
+        
+        <div id="status" class="status">Ready to record</div>
+        
+        <div id="transcript" contenteditable="true" spellcheck="true"></div>
+        
+        <div class="controls">
+            <button id="replayButton">Replay Transcript</button>
+            <button id="stopButton" disabled>Stop Playback</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const micButton = document.getElementById('micButton');
+        const transcriptDiv = document.getElementById('transcript');
+        const replayButton = document.getElementById('replayButton');
+        const stopButton = document.getElementById('stopButton');
+        const statusDiv = document.getElementById('status');
+        
+        // Speech recognition variables
+        let recognition;
+        let isRecording = false;
+        let recordingStartTime;
+        let transcript = '';
+        let finalTranscript = '';
+        
+        // Speech synthesis variables
+        let isSpeaking = false;
+        let currentUtterance = null;
+        
+        // Add event listener for text input
+        transcriptDiv.addEventListener('input', () => {
+            transcript = transcriptDiv.textContent;
+            saveTranscript();
+        });
+        
+        // Add event listener for paste event
+        transcriptDiv.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+        });
+        
+        // Initialize speech recognition
+        function initSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                
+                recognition.onstart = () => {
+                    isRecording = true;
+                    recordingStartTime = Date.now();
+                    statusDiv.textContent = 'Recording... Speak now';
+                    micButton.classList.add('active');
+                };
+                
+                recognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const currentTranscript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalTranscript += currentTranscript + ' ';
+                        } else {
+                            interimTranscript += currentTranscript;
+                        }
+                    }
+                    
+                    transcript = finalTranscript + interimTranscript;
+                    transcriptDiv.textContent = transcript;
+                    
+                    // Save to localStorage every 5 seconds
+                    if (Date.now() - recordingStartTime > 5000) {
+                        saveTranscript();
+                        recordingStartTime = Date.now();
+                    }
+                };
+                
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error', event.error);
+                    statusDiv.textContent = `Error: ${event.error}`;
+                    stopRecording();
+                };
+                
+                recognition.onend = () => {
+                    if (isRecording) {
+                        // If recording was stopped unexpectedly, try to restart
+                        recognition.start();
+                    }
+                };
+            } else {
+                statusDiv.textContent = 'Speech recognition not supported in this browser';
+                micButton.disabled = true;
+            }
+        }
+        
+        // Initialize speech synthesis
+        function initSpeechSynthesis() {
+            if (!('speechSynthesis' in window)) {
+                replayButton.disabled = true;
+                statusDiv.textContent = 'Text-to-speech not supported in this browser';
+            }
+        }
+        
+        // Start recording
+        function startRecording() {
+            if (!recognition) {
+                statusDiv.textContent = 'Speech recognition not initialized';
+                return;
+            }
+            
+            finalTranscript = '';
+            transcript = '';
+            transcriptDiv.textContent = '';
+            
+            try {
+                recognition.start();
+            } catch (e) {
+                statusDiv.textContent = 'Error starting recording: ' + e.message;
+            }
+        }
+        
+        // Stop recording
+        function stopRecording() {
+            if (recognition && isRecording) {
+                isRecording = false;
+                recognition.stop();
+                micButton.classList.remove('active');
+                statusDiv.textContent = 'Recording saved';
+                saveTranscript();
+            }
+        }
+        
+        // Save transcript to localStorage
+        function saveTranscript() {
+            if (transcript.trim()) {
+                localStorage.setItem('speechTranscript', transcript);
+            }
+        }
+        
+        // Load transcript from localStorage
+        function loadTranscript() {
+            const savedTranscript = localStorage.getItem('speechTranscript');
+            if (savedTranscript) {
+                transcript = savedTranscript;
+                transcriptDiv.textContent = transcript;
+            }
+        }
+        
+        // Speak the transcript
+        function speakTranscript() {
+            if (isSpeaking) {
+                window.speechSynthesis.cancel();
+            }
+            
+            const textToSpeak = transcriptDiv.textContent.trim();
+            if (!textToSpeak) return;
+            
+            currentUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            
+            // Try to find a female voice
+            const voices = window.speechSynthesis.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.name.toLowerCase().includes('female') || 
+                voice.lang.includes('en-US') || 
+                voice.lang.includes('en-GB')
+            );
+            
+            if (femaleVoice) {
+                currentUtterance.voice = femaleVoice;
+            }
+            
+            currentUtterance.onstart = () => {
+                isSpeaking = true;
+                replayButton.disabled = true;
+                stopButton.disabled = false;
+                statusDiv.textContent = 'Playing back...';
+            };
+            
+            currentUtterance.onend = () => {
+                isSpeaking = false;
+                replayButton.disabled = false;
+                stopButton.disabled = true;
+                statusDiv.textContent = 'Playback complete';
+            };
+
+            currentUtterance.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+                isSpeaking = false;
+                replayButton.disabled = false;
+                stopButton.disabled = true;
+                statusDiv.textContent = 'Error during playback';
+            };
+            
+            window.speechSynthesis.speak(currentUtterance);
+        }
+        
+        // Stop speech synthesis
+        function stopSpeech() {
+            if (isSpeaking) {
+                window.speechSynthesis.cancel();
+                isSpeaking = false;
+                replayButton.disabled = false;
+                stopButton.disabled = true;
+                statusDiv.textContent = 'Playback stopped';
+            }
+        }
+        
+        // Event listeners
+        micButton.addEventListener('click', () => {
+            if (isRecording) {
+                stopRecording();
+            } else {
+                startRecording();
+            }
+        });
+        
+        replayButton.addEventListener('click', speakTranscript);
+        stopButton.addEventListener('click', stopSpeech);
+        
+        // Load any saved transcript on page load
+        window.addEventListener('load', () => {
+            initSpeechRecognition();
+            initSpeechSynthesis();
+            loadTranscript();
+            
+            // Chrome needs this to populate voices
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = initSpeechSynthesis;
+            }
+        });
+        
+        // Auto-stop recording after 3 minutes
+        setInterval(() => {
+            if (isRecording && Date.now() - recordingStartTime > 180000) {
+                stopRecording();
+                statusDiv.textContent = 'Recording stopped after 3 minutes';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
