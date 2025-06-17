@@ -273,7 +273,7 @@
                 stopButton.disabled = true;
                 statusDiv.textContent = 'Playback complete';
             };
-
+            
             currentUtterance.onerror = (event) => {
                 console.error('Speech synthesis error:', event);
                 isSpeaking = false;
@@ -288,11 +288,11 @@
         // Stop speech synthesis
         function stopSpeech() {
             if (isSpeaking) {
-                window.speechSynthesis.cancel();
-                isSpeaking = false;
-                replayButton.disabled = false;
-                stopButton.disabled = true;
-                statusDiv.textContent = 'Playback stopped';
+            window.speechSynthesis.cancel();
+            isSpeaking = false;
+            replayButton.disabled = false;
+            stopButton.disabled = true;
+            statusDiv.textContent = 'Playback stopped';
             }
         }
         
