@@ -18,7 +18,10 @@ Here's a robust **AI-powered weather web app architecture** with modern framewor
     │                           │  (Vercel/Cloudflare) │  (OpenWeather)│
     │                           └─────────────────┘    └──────────────┘
     │                                    ↓
-    └────────────────────────────────────┘
+    │                           ┌─────────────────┐
+    └───────────────────────────│     MCP Server  │
+                                │  (Message Queue)│
+                                └─────────────────┘
 ```
 
 ---
@@ -181,4 +184,27 @@ export async function GET(req) {
     return new Response('Rate limit exceeded', { status: 429 });
   }
   // Continue with request
+}
+
+// Example MCP server message handling
+class WeatherMCP {
+  async handleVoiceStream(stream) {
+    // Process voice stream
+    const text = await this.convertToText(stream);
+    // Queue for AI processing
+    await this.queue.push({
+      type: 'weather_query',
+      text: text,
+      timestamp: Date.now()
+    });
+  }
+
+  async handleWeatherUpdate(city) {
+    // Push weather updates to subscribed clients
+    await this.broadcast({
+      type: 'weather_update',
+      city: city,
+      data: weatherData
+    });
+  }
 }
