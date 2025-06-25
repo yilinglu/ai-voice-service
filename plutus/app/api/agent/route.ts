@@ -24,7 +24,11 @@ async function agentHandler(request: Request) {
   const isValid = verifySignature({ payload, signature, secret });
 
   if (!isValid) {
-    console.error('Invalid signature', signature, secret, payload);
+    logger.error('Invalid webhook signature', {
+      signature: signature ? '***' : 'missing',
+      secretConfigured: !!secret,
+      payloadLength: payload.length
+    });
     return new Response('Unauthorized', { status: 401 });
   }
 

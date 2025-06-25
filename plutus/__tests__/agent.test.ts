@@ -1,4 +1,5 @@
 import { POST } from '../app/api/agent/route';
+import logger from '../lib/logger';
 
 // Mock the external dependencies
 jest.mock('@layercode/node-server-sdk', () => ({
@@ -19,6 +20,13 @@ jest.mock('ai', () => ({
 import { verifySignature } from '@layercode/node-server-sdk';
 
 const mockVerifySignature = verifySignature as jest.MockedFunction<typeof verifySignature>;
+
+jest.mock('../lib/logger', () => ({
+  error: jest.fn(),
+  info: jest.fn(),
+  debug: jest.fn(),
+  warn: jest.fn(),
+}));
 
 describe('Agent API Route', () => {
   beforeEach(() => {
@@ -132,11 +140,13 @@ describe('Agent API Route', () => {
 
     await POST(request);
 
-    expect(console.error).toHaveBeenCalledWith(
-      'Invalid signature',
-      'invalid-signature',
-      'test-webhook-secret',
-      expect.any(String)
+    expect(logger.error).toHaveBeenCalledWith(
+      'Invalid webhook signature',
+      expect.objectContaining({
+        signature: expect.any(String),
+        secretConfigured: expect.any(Boolean),
+        payloadLength: expect.any(Number),
+      })
     );
   });
 }); 

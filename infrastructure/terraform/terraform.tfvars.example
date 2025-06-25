@@ -1,0 +1,14 @@
+# Copy this file to terraform.tfvars and update the values
+
+aws_region = "us-east-1"
+github_repository = "your-username/ai-voice-service"
+github_branch = "main"
+domain_name = "your-domain.com"
+certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/your-cert-id"
+
+common_tags = {
+  Project     = "plutus-voice-agent"
+  Environment = "production"
+  ManagedBy   = "terraform"
+  Owner       = "your-team"
+} 

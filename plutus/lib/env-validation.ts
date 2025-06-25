@@ -72,45 +72,37 @@ export function validateAndExit(): void {
   const result = validateEnvironment();
 
   if (!result.isValid) {
-    console.error('\n❌ Critical environment validation failed!');
-    console.error('The Plutus server cannot start without proper configuration.\n');
+    logger.error('❌ Critical environment validation failed!');
+    logger.error('The Plutus server cannot start without proper configuration.');
     
     if (result.missing.length > 0) {
-      console.error('Missing environment variables:');
-      result.missing.forEach(key => {
-        console.error(`  - ${key}`);
-      });
-      console.error('');
+      logger.error('Missing environment variables:', { missing: result.missing });
     }
 
     if (result.errors.length > 0) {
-      console.error('Configuration errors:');
-      result.errors.forEach(error => {
-        console.error(`  - ${error}`);
-      });
-      console.error('');
+      logger.error('Configuration errors:', { errors: result.errors });
     }
 
-    console.error('📋 Setup Instructions:');
-    console.error('1. Copy env.example to .env.local');
-    console.error('2. Add your API keys to .env.local:');
-    console.error('   - LAYERCODE_API_KEY (from Layercode dashboard)');
-    console.error('   - LAYERCODE_WEBHOOK_SECRET (from your pipeline settings)');
-    console.error('   - GOOGLE_GENERATIVE_AI_API_KEY (from Google AI Studio)');
-    console.error('3. Restart the server');
-    console.error('\n🔗 Get your keys from:');
-    console.error('   - Layercode: https://dash.layercode.com');
-    console.error('   - Google AI: https://aistudio.google.com/app/apikey');
+    logger.error('📋 Setup Instructions:');
+    logger.error('1. Copy env.example to .env.local');
+    logger.error('2. Add your API keys to .env.local:');
+    logger.error('   - LAYERCODE_API_KEY (from Layercode dashboard)');
+    logger.error('   - LAYERCODE_WEBHOOK_SECRET (from your pipeline settings)');
+    logger.error('   - GOOGLE_GENERATIVE_AI_API_KEY (from Google AI Studio)');
+    logger.error('3. Restart the server');
+    logger.error('🔗 Get your keys from:');
+    logger.error('   - Layercode: https://dash.layercode.com');
+    logger.error('   - Google AI: https://aistudio.google.com/app/apikey');
     
     process.exit(1);
   }
 
-  console.log('✅ Environment validation passed');
-  console.log('✅ All critical environment variables are configured');
+  logger.info('✅ Environment validation passed');
+  logger.info('✅ All critical environment variables are configured');
 }
 
 // Run validation if this file is executed directly
 if (require.main === module) {
-  console.log('🔍 Validating Plutus server environment...\n');
+  logger.info('🔍 Validating Plutus server environment...');
   validateAndExit();
 } 

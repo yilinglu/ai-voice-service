@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import { withEnhancedLogging } from "../../../lib/request-logger";
+import logger from "../../../lib/logger";
 
 async function authorizeHandler(request: Request) {
   // Here you could do any user authorization checks you need for your app
@@ -28,7 +29,10 @@ async function authorizeHandler(request: Request) {
     }
     return NextResponse.json(await response.json());
   } catch (error: unknown) {
-    console.log("Layercode authorize session response error:", error instanceof Error ? error.message : error);
+    logger.error("Layercode authorize session response error:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
     return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });
   }
 }

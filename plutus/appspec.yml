@@ -1,0 +1,36 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: <TASK_DEFINITION>
+        LoadBalancerInfo:
+          ContainerName: "plutus-voice-agent"
+          ContainerPort: 3000
+        PlatformVersion: "LATEST"
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets:
+              - "subnet-xxxxxxxxx"
+              - "subnet-yyyyyyyyy"
+            SecurityGroups:
+              - "sg-xxxxxxxxx"
+            AssignPublicIp: "ENABLED"
+        AutoScalingConfiguration:
+          MinCapacity: 1
+          MaxCapacity: 10
+          ScaleInCooldown: 300
+          ScaleOutCooldown: 300
+          TargetCpuUtilization: 70
+          TargetMemoryUtilization: 70
+        DeploymentConfiguration:
+          Type: "CODE_DEPLOY"
+          MaximumPercent: 200
+          MinimumHealthyPercent: 50
+          DeploymentCircuitBreaker:
+            Enable: true
+            Rollback: true
+        HealthCheckGracePeriodSeconds: 60
+        EnableECSManagedTags: true
+        PropagateTags: "SERVICE"
+        EnableExecuteCommand: true 
