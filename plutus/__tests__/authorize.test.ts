@@ -61,7 +61,7 @@ describe('Authorize API Route', () => {
     const data = await response.json();
 
     expect(response.status).toBe(500);
-    expect(data.error).toBe('Server configuration error: LAYERCODE_API_KEY is not set');
+    expect(data.error).toBe('LAYERCODE_API_KEY is not set.');
   });
 
   it('should return error when pipeline_id is missing', async () => {
@@ -75,7 +75,7 @@ describe('Authorize API Route', () => {
     const data = await response.json();
 
     expect(response.status).toBe(400);
-    expect(data.error).toBe('Missing pipeline_id in request body');
+    expect(data.error).toBe('Missing pipeline_id in request body.');
   });
 
   it('should return error when Layercode API returns error', async () => {

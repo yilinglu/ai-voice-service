@@ -1,3 +1,8 @@
+import logger from './logger';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env.local' });
+
 /**
  * Environment Validation Utility
  * Validates critical environment variables required for the Plutus server
@@ -10,6 +15,8 @@ interface ValidationResult {
 }
 
 export function validateEnvironment(): ValidationResult {
+  logger.info('Starting environment validation');
+  
   const criticalVars = [
     'LAYERCODE_API_KEY',
     'LAYERCODE_WEBHOOK_SECRET',
@@ -24,26 +31,44 @@ export function validateEnvironment(): ValidationResult {
     if (!process.env[key]) {
       missing.push(key);
       errors.push(`${key} is not set`);
+      logger.error(`Missing environment variable: ${key}`);
+    } else {
+      logger.debug(`Environment variable found: ${key}`);
     }
   });
 
   // Additional validation for specific variables
   if (process.env.LAYERCODE_API_KEY && process.env.LAYERCODE_API_KEY.length < 10) {
     errors.push('LAYERCODE_API_KEY appears to be invalid (too short)');
+    logger.error('LAYERCODE_API_KEY appears to be invalid (too short)');
   }
 
   if (process.env.GOOGLE_GENERATIVE_AI_API_KEY && process.env.GOOGLE_GENERATIVE_AI_API_KEY.length < 10) {
     errors.push('GOOGLE_GENERATIVE_AI_API_KEY appears to be invalid (too short)');
+    logger.error('GOOGLE_GENERATIVE_AI_API_KEY appears to be invalid (too short)');
   }
 
-  return {
+  const result = {
     isValid: missing.length === 0 && errors.length === 0,
     missing,
     errors
   };
+
+  if (result.isValid) {
+    logger.info('Environment validation passed successfully');
+  } else {
+    logger.error('Environment validation failed', {
+      missing: result.missing,
+      errors: result.errors
+    });
+  }
+
+  return result;
 }
 
 export function validateAndExit(): void {
+  logger.info('🔍 Validating Plutus server environment...');
+  
   const result = validateEnvironment();
 
   if (!result.isValid) {
@@ -82,4 +107,10 @@ export function validateAndExit(): void {
 
   console.log('✅ Environment validation passed');
   console.log('✅ All critical environment variables are configured');
+}
+
+// Run validation if this file is executed directly
+if (require.main === module) {
+  console.log('🔍 Validating Plutus server environment...\n');
+  validateAndExit();
 } 

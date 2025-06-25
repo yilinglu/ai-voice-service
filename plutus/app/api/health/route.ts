@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-const { validateEnvironment } = require('../../../lib/env-validation.js');
+import { validateEnvironment } from '../../../lib/env-validation';
+import { withEnhancedLogging } from '../../../lib/request-logger';
 
-export async function GET() {
+async function healthHandler() {
   const envValidation = validateEnvironment();
   
   if (!envValidation.isValid) {
@@ -21,4 +22,10 @@ export async function GET() {
     service: 'plutus-layercode-backend',
     environment: 'configured'
   });
-} 
+}
+
+// Export the enhanced wrapped handler
+export const GET = withEnhancedLogging(healthHandler, {
+  name: 'health-check',
+  sensitiveFields: [] // No sensitive data in health checks
+}); 

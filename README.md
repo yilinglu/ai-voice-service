@@ -121,6 +121,10 @@ If running locally, you'll need to expose your server to the internet using a tu
 npx cloudflared tunnel --url http://localhost:3000
 ```
 
+Get a tunnel url like this: https://chad-keywords-attacks-cite.trycloudflare.com
+Turn it into https://chad-keywords-attacks-cite.trycloudflare.com/api/agent, this is the webhook url to enter into layercode dashboard.
+https://cast-tba-enable-expiration.trycloudflare.com/api/agent
+
 Then use the provided tunnel URL as your webhook endpoint in Layercode.
 
 ## Customization

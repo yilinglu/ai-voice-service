@@ -6,7 +6,11 @@ describe('Health API Route', () => {
   });
 
   it('should return healthy status with correct data structure', async () => {
-    const response = await GET();
+    const request = new Request('http://localhost:3000/api/health', {
+      method: 'GET'
+    });
+    
+    const response = await GET(request);
     const data = await response.json();
 
     expect(response.status).toBe(200);
@@ -18,13 +22,21 @@ describe('Health API Route', () => {
   });
 
   it('should return valid JSON response', async () => {
-    const response = await GET();
+    const request = new Request('http://localhost:3000/api/health', {
+      method: 'GET'
+    });
+    
+    const response = await GET(request);
     
     expect(response.headers.get('Content-Type')).toContain('application/json');
   });
 
   it('should have correct response structure', async () => {
-    const response = await GET();
+    const request = new Request('http://localhost:3000/api/health', {
+      method: 'GET'
+    });
+    
+    const response = await GET(request);
     const data = await response.json();
 
     const expectedKeys = ['status', 'timestamp', 'service'];

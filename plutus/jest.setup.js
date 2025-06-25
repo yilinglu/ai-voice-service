@@ -4,6 +4,9 @@ process.env.LAYERCODE_WEBHOOK_SECRET = 'test-webhook-secret';
 process.env.GOOGLE_GENERATIVE_AI_API_KEY = 'test-google-api-key';
 process.env.NEXT_PUBLIC_LAYERCODE_PIPELINE_ID = 'test-pipeline-id';
 
+// Fix setImmediate for Jest environment
+global.setImmediate = global.setImmediate || ((fn, ...args) => global.setTimeout(fn, 0, ...args));
+
 // Mock fetch globally
 global.fetch = jest.fn();
 
@@ -16,21 +19,30 @@ global.console = {
   info: jest.fn(),
 };
 
-// Mock Request constructor
+// Mock Request constructor with proper method and url properties
 global.Request = class Request {
   constructor(url, init = {}) {
-    this.url = url;
+    this.url = url || 'http://localhost:3000/api/test';
     this.method = init.method || 'GET';
     this.headers = new Map(Object.entries(init.headers || {}));
     this.body = init.body || null;
+    this.nextUrl = { pathname: '/api/test' };
   }
 
   json() {
-    return Promise.resolve(JSON.parse(this.body));
+    return Promise.resolve(JSON.parse(this.body || '{}'));
   }
 
   text() {
-    return Promise.resolve(this.body);
+    return Promise.resolve(this.body || '');
+  }
+
+  clone() {
+    return new Request(this.url, {
+      method: this.method,
+      headers: this.headers,
+      body: this.body
+    });
   }
 };
 
@@ -66,4 +78,12 @@ jest.mock('next/server', () => ({
       });
     }),
   },
+}));
+
+// Mock the logger to prevent Winston issues in tests
+jest.mock('./lib/logger', () => ({
+  info: jest.fn(),
+  error: jest.fn(),
+  warn: jest.fn(),
+  debug: jest.fn(),
 })); 

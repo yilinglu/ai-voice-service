@@ -1,26 +1,18 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
+import { withEnhancedLogging } from "../../../lib/request-logger";
 
-export const POST = async (request: Request) => {
+async function authorizeHandler(request: Request) {
   // Here you could do any user authorization checks you need for your app
   const endpoint = "https://api.layercode.com/v1/pipelines/authorize_session";
   const apiKey = process.env.LAYERCODE_API_KEY;
-  
   if (!apiKey) {
-    return NextResponse.json(
-      { error: "Server configuration error: LAYERCODE_API_KEY is not set" }, 
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "LAYERCODE_API_KEY is not set." }, { status: 500 });
   }
-  
   const requestBody = await request.json();
   if (!requestBody || !requestBody.pipeline_id) {
-    return NextResponse.json(
-      { error: "Missing pipeline_id in request body" }, 
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Missing pipeline_id in request body." }, { status: 400 });
   }
-  
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -30,21 +22,19 @@ export const POST = async (request: Request) => {
       },
       body: JSON.stringify(requestBody),
     });
-    
     if (!response.ok) {
       const text = await response.text();
-      return NextResponse.json(
-        { error: text || response.statusText }, 
-        { status: response.status }
-      );
+      return NextResponse.json({ error: text || response.statusText }, { status: response.status });
     }
-    
     return NextResponse.json(await response.json());
-  } catch (error: any) {
-    console.log("Layercode authorize session response error:", error.message);
-    return NextResponse.json(
-      { error: error.message }, 
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    console.log("Layercode authorize session response error:", error instanceof Error ? error.message : error);
+    return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });
   }
-}; 
+}
+
+// Export the enhanced wrapped handler with sensitive field masking
+export const POST = withEnhancedLogging(authorizeHandler, {
+  name: 'layercode-authorize',
+  sensitiveFields: ['api_key', 'client_session_key', 'session_id', 'pipeline_id']
+}); 
