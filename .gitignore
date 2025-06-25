@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+*.lcov
+*.coverage
 
 # next.js
 /.next/
@@ -14,6 +16,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -25,8 +28,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
 .env
+.env.*
+.env.local
 
 # vercel
 .vercel
@@ -34,3 +38,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
