@@ -142,6 +142,7 @@ function withEnhancedLogging(handler: ApiHandler, context: RequestContext = {}):
         context: context.name || 'api',
         status: response?.status || 200,
         processing_time_ms: processingTime,
+        requestBody,
         timestamp: new Date().toISOString()
       });
       
@@ -160,6 +161,7 @@ function withEnhancedLogging(handler: ApiHandler, context: RequestContext = {}):
         error: error instanceof Error ? error.message : String(error),
         stack: error instanceof Error ? error.stack : undefined,
         processing_time_ms: processingTime,
+        requestBody,
         timestamp: new Date().toISOString()
       });
       
