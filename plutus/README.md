@@ -40,7 +40,7 @@ A Next.js backend server application that integrates with Layercode's voice agen
    GOOGLE_GENERATIVE_AI_API_KEY=your_google_ai_api_key_here
 
    # Server Configuration
-   PORT=3000
+   # PORT=3000  # Uncomment and set to change the server port (default: 3000)
    NODE_ENV=development
    ```
 
@@ -49,6 +49,23 @@ A Next.js backend server application that integrates with Layercode's voice agen
    - **Layercode Webhook Secret**: Get from your pipeline settings in the Layercode Dashboard
    - **Pipeline ID**: Found in your Layercode pipeline URL
    - **Google AI API Key**: Get from [Google AI Studio](https://makersuite.google.com/app/apikey)
+
+### Configuring the Server Port
+
+The server port can be configured using the `PORT` environment variable. By default, the application will use port 3000. If you want to use a different port, set `PORT` in your `.env.local` or in your shell before running the server:
+
+```env
+# .env.local
+PORT=4000
+```
+
+Or when running the command:
+
+```bash
+PORT=4000 npm run dev
+```
+
+> **Note:** The port is checked before startup. If the port is already in use, the server will not start and you will see a clear error message.
 
 ### Running the Application
 
@@ -64,7 +81,7 @@ npm start
 npm test
 ```
 
-The server will start on `http://localhost:3000`
+The server will start on `http://localhost:<PORT>` (default: 3000)
 
 ## API Endpoints
 
@@ -127,6 +144,7 @@ If running locally, you'll need to expose your server to the internet using a tu
 # Using cloudflared (recommended)
 npx cloudflared tunnel --url http://localhost:3000
 ```
+https://tracks-filed-lie-cho.trycloudflare.com/api/agent
 
 Use the provided tunnel URL as your webhook endpoint in Layercode.
 

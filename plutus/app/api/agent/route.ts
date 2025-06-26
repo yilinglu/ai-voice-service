@@ -39,7 +39,7 @@ async function agentHandler(request: Request) {
       model: google('gemini-2.0-flash-001'),
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: [{ type: 'text', text: requestBody.text }] }],
-      onFinish: async () => {
+      onFinish: async ({ response }) => {
         // Log the complete AI response
         logger.info('AI Response:', {
           userMessage: requestBody.text,
@@ -52,13 +52,12 @@ async function agentHandler(request: Request) {
       },
     });
     
-    // Accumulate the text stream and log it
+    // Stream the text chunks to Layercode for TTS conversion
     for await (const chunk of textStream) {
       fullResponseText += chunk;
+      // Send each chunk to Layercode for immediate TTS processing
+      stream.tts(chunk);
     }
-    
-    // Here we return the textStream chunks as SSE messages to Layercode, to be spoken to the user
-    await stream.ttsTextStream(textStream);
   });
 }
 

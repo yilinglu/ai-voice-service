@@ -4,9 +4,9 @@
   "description": "Next.js backend server for Layercode voice agent integration",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tsx lib/env-validation.ts && next dev",
+    "dev": "node scripts/check-port.js && npx tsx lib/env-validation.ts && next dev",
     "build": "npx tsx lib/env-validation.ts && next build",
-    "start": "npx tsx lib/env-validation.ts && next start",
+    "start": "node scripts/check-port.js && npx tsx lib/env-validation.ts && next start",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
