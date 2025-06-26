@@ -33,20 +33,103 @@ async function agentHandler(request: Request) {
   }
 
   return streamResponse(requestBody, async ({ stream }) => {
-    let fullResponseText = '';
-    
     const { textStream } = streamText({
       model: google('gemini-2.0-flash-001'),
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: [{ type: 'text', text: requestBody.text }] }],
       onFinish: async ({ response }) => {
-        // Log the complete AI response
+        // Extract and process the complete AI response from the assistant's message
+        const assistantMessage = response.messages.find(msg => msg.role === 'assistant');
+        let aiResponse = 'No text response generated';
+        let nonTextContent: any[] = [];
+        
+        if (assistantMessage?.content) {
+          // Handle content which can be string or array of parts
+          if (typeof assistantMessage.content === 'string') {
+            aiResponse = assistantMessage.content;
+          } else if (Array.isArray(assistantMessage.content)) {
+            // Process each content part
+            assistantMessage.content.forEach(part => {
+              if (typeof part === 'object' && part && 'type' in part) {
+                switch (part.type) {
+                  case 'text':
+                    aiResponse = part.text as string;
+                    break;
+                  case 'tool-call':
+                    nonTextContent.push({
+                      type: 'tool-call',
+                      toolName: part.toolName,
+                      toolCallId: part.toolCallId,
+                      args: part.args
+                    });
+                    break;
+                  case 'file':
+                    nonTextContent.push({
+                      type: 'file',
+                      part: part
+                    });
+                    break;
+                  case 'reasoning':
+                    nonTextContent.push({
+                      type: 'reasoning',
+                      part: part
+                    });
+                    break;
+                  case 'redacted-reasoning':
+                    nonTextContent.push({
+                      type: 'redacted-reasoning',
+                      part: part
+                    });
+                    break;
+                  default:
+                    nonTextContent.push({
+                      type: 'unknown',
+                      part: part
+                    });
+                }
+              }
+            });
+          }
+        }
+        
+        // Log the complete AI response with all content types
         logger.info('AI Response:', {
           userMessage: requestBody.text,
-          aiResponse: fullResponseText,
+          aiResponse: aiResponse,
+          nonTextContent: nonTextContent.length > 0 ? nonTextContent : undefined,
           sessionId: requestBody.session_id,
           turnId: requestBody.turn_id
         });
+        
+        // Handle non-text content for voice agent
+        if (nonTextContent.length > 0) {
+          nonTextContent.forEach(content => {
+            switch (content.type) {
+              case 'tool-call':
+                logger.info('Tool call detected:', {
+                  toolName: content.toolName,
+                  toolCallId: content.toolCallId,
+                  args: content.args
+                });
+                // For voice agent, we might want to announce tool usage
+                // stream.tts(`I'm using ${content.toolName} to help you.`);
+                break;
+              case 'file':
+                logger.info('File reference detected:', {
+                  fileId: content.fileId,
+                  fileName: content.fileName
+                });
+                // stream.tts(`I found a file: ${content.fileName}`);
+                break;
+              case 'reasoning':
+                logger.debug('AI reasoning:', {
+                  reasoning: content.part
+                });
+                // Usually don't announce reasoning to user
+                break;
+            }
+          });
+        }
         
         stream.end(); // We must call stream.end() here to tell Layercode that the assistant's response has finished
       },
@@ -54,7 +137,6 @@ async function agentHandler(request: Request) {
     
     // Stream the text chunks to Layercode for TTS conversion
     for await (const chunk of textStream) {
-      fullResponseText += chunk;
       // Send each chunk to Layercode for immediate TTS processing
       stream.tts(chunk);
     }

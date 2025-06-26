@@ -144,7 +144,6 @@ If running locally, you'll need to expose your server to the internet using a tu
 # Using cloudflared (recommended)
 npx cloudflared tunnel --url http://localhost:3000
 ```
-https://tracks-filed-lie-cho.trycloudflare.com/api/agent
 
 Use the provided tunnel URL as your webhook endpoint in Layercode.
 
@@ -198,86 +197,161 @@ curl -X POST http://localhost:3000/api/agent \
     "text": "Hello, how are you?",
     "type": "message",
     "session_id": "test-123",
-    "turn_id": "turn-456"
+    "turn_id": "turn-123"
   }'
 ```
 
-### Test the Authorization Endpoint
+### Run Tests
 
 ```bash
-curl -X POST http://localhost:3000/api/authorize \
-  -H "Content-Type: application/json" \
-  -d '{
-    "pipeline_id": "your_pipeline_id"
-  }'
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests with coverage summary
+npm run test:coverage:summary
 ```
 
-### Health Check
+## Production Deployment
+
+### AWS CDK Deployment
+
+The application is designed to be deployed using AWS CDK. See the [Infrastructure Documentation](../infrastructure/README.md) for detailed deployment instructions.
+
+**Quick Deployment**:
+```bash
+# Navigate to CDK infrastructure
+cd ../infrastructure/cdk
+
+# Deploy to development environment
+./scripts/deploy.sh dev
+
+# Deploy to production environment
+./scripts/deploy.sh prod
+```
+
+### Docker Deployment
+
+The application includes a Dockerfile for containerized deployment:
 
 ```bash
-curl http://localhost:3000/api/health
+# Build the Docker image
+docker build -t plutus-voice-agent .
+
+# Run the container
+docker run -p 3000:3000 \
+  -e LAYERCODE_API_KEY=your_key \
+  -e LAYERCODE_WEBHOOK_SECRET=your_secret \
+  -e GOOGLE_GENERATIVE_AI_API_KEY=your_key \
+  plutus-voice-agent
 ```
 
-## Logging
+### Environment Variables for Production
+
+For production deployment, ensure these environment variables are set:
+
+```env
+# Required
+LAYERCODE_API_KEY=your_layercode_api_key
+LAYERCODE_WEBHOOK_SECRET=your_layercode_webhook_secret
+GOOGLE_GENERATIVE_AI_API_KEY=your_google_ai_api_key
+
+# Optional
+NODE_ENV=production
+PORT=3000
+```
+
+## Monitoring and Logging
+
+### Logging
 
 The application uses Winston for structured logging:
 
-- **Console Output**: Colorized logs for development
-- **File Logs**: Rotated log files in production
-- **Request Logging**: Enhanced logging with request IDs and timing
-- **Error Tracking**: Detailed error logging with stack traces
+- **Request Logging**: All API requests are logged with timing and status
+- **Error Logging**: Errors are logged with stack traces
+- **Environment Validation**: Startup validation is logged
 
-## Docker
+### Health Monitoring
 
-### Building the Image
+The `/api/health` endpoint provides:
 
-```bash
-docker build -t plutus-voice-agent .
-```
+- Application status
+- Environment variable validation
+- Response time metrics
 
-### Running with Docker
+### CloudWatch Integration
 
-```bash
-docker run -p 3000:3000 \
-  -e GOOGLE_GENERATIVE_AI_API_KEY=your-key \
-  -e LAYERCODE_API_KEY=your-key \
-  -e LAYERCODE_WEBHOOK_SECRET=your-secret \
-  plutus-voice-agent
-```
+When deployed on AWS, logs are automatically sent to CloudWatch:
+
+- **Log Group**: `/aws/ecs/plutus`
+- **Retention**: 1 month (configurable)
+- **Metrics**: CPU, memory, request count
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **"LAYERCODE_API_KEY is not set"**
-   - Ensure your `.env.local` file exists and contains the correct API key
+1. **Port Already in Use**
+   ```bash
+   # Check what's using the port
+   lsof -i :3000
+   
+   # Kill the process
+   kill -9 <PID>
+   ```
 
-2. **"Invalid signature" errors**
-   - Verify your `LAYERCODE_WEBHOOK_SECRET` matches the one in your Layercode pipeline
+2. **Environment Variables Missing**
+   - Check `.env.local` file exists
+   - Verify all required variables are set
+   - Restart the development server
 
-3. **"GOOGLE_GENERATIVE_AI_API_KEY is not set"**
-   - Add your Google AI API key to the environment variables
+3. **Layercode Webhook Failures**
+   - Verify webhook secret is correct
+   - Check webhook URL is accessible
+   - Review application logs for errors
 
-4. **Webhook not receiving requests**
-   - Check that your webhook URL is accessible from the internet
-   - Verify the URL in your Layercode pipeline settings
+4. **Google AI API Errors**
+   - Verify API key is valid
+   - Check API quota and billing
+   - Review error messages in logs
 
-### Logs
+### Debug Mode
 
-Check the console output for detailed error messages and request logs. Logs are also written to files in the `logs/` directory.
+Enable debug logging by setting the log level:
 
-## Production Deployment
+```env
+LOG_LEVEL=debug
+```
 
-For production deployment, see the [Infrastructure Documentation](../infrastructure/README.md) for AWS deployment instructions.
+## Performance Optimization
+
+### Production Recommendations
+
+1. **Database**: Use a persistent database for session storage
+2. **Caching**: Implement Redis for session caching
+3. **CDN**: Use CloudFront for static assets
+4. **Monitoring**: Set up CloudWatch alarms for errors and performance
+
+### Scaling
+
+The application is designed to scale horizontally:
+
+- **Stateless**: No local state dependencies
+- **Session Storage**: Can be moved to external database
+- **Load Balancing**: Supports multiple instances
+- **Auto Scaling**: Configured in AWS CDK infrastructure
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
 
 ## License
 
-ISC License 
+This project is licensed under the MIT License. 

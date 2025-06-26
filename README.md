@@ -13,7 +13,7 @@ ai-voice-service/
 │   ├── buildspec.yml          # AWS CodeBuild configuration
 │   └── package.json           # Application dependencies
 ├── infrastructure/            # Infrastructure as Code
-│   ├── terraform/             # Terraform configurations
+│   ├── cdk/                   # AWS CDK configurations
 │   ├── scripts/               # Deployment scripts
 │   └── README.md              # Infrastructure documentation
 └── README.md                  # This file
@@ -41,15 +41,17 @@ npm run dev
 ### Production Deployment
 
 ```bash
-# Navigate to infrastructure
-cd infrastructure
+# Navigate to CDK infrastructure
+cd infrastructure/cdk
 
-# Configure deployment
-cp terraform/terraform.tfvars.example terraform/terraform.tfvars
-# Edit terraform.tfvars with your values
+# Install dependencies
+npm install
 
-# Run deployment
-./scripts/deploy.sh
+# Deploy to development environment
+./scripts/deploy.sh dev
+
+# Deploy to production environment
+./scripts/deploy.sh prod
 ```
 
 ## 📋 Prerequisites
@@ -61,7 +63,7 @@ cp terraform/terraform.tfvars.example terraform/terraform.tfvars
 
 ### For Production Deployment:
 - AWS CLI configured
-- Terraform installed
+- Node.js 18+ (for CDK)
 - Docker installed
 - GitHub repository
 
@@ -79,13 +81,11 @@ LAYERCODE_WEBHOOK_SECRET=your-layercode-webhook-secret
 
 ### Infrastructure Configuration
 
-Edit `infrastructure/terraform/terraform.tfvars`:
+The CDK infrastructure is configured through TypeScript files in `infrastructure/cdk/`. Key configuration files:
 
-```hcl
-aws_region = "us-east-1"
-github_repository = "your-username/ai-voice-service"
-github_branch = "main"
-```
+- `lib/plutus-infrastructure-stack.ts` - Main infrastructure stack
+- `bin/plutus-infrastructure.ts` - CDK app entry point
+- `cdk.json` - CDK configuration
 
 ## 🌐 API Endpoints
 
@@ -95,16 +95,18 @@ github_branch = "main"
 
 ## 🔄 CI/CD Pipeline
 
-The project uses AWS CodePipeline for automated deployments:
+The project uses AWS CDK for infrastructure and supports CI/CD integration:
 
-1. **Source**: Monitors GitHub repository
-2. **Build**: Builds Docker image and runs tests
-3. **Deploy**: Deploys to ECS with zero downtime
+1. **Infrastructure**: Deployed with AWS CDK
+2. **Application**: Containerized with Docker
+3. **Deployment**: ECS Fargate with auto-scaling
+4. **Monitoring**: CloudWatch dashboards and logs
 
 ## 📊 Monitoring
 
-- **CloudWatch Logs**: Application and infrastructure logs
-- **Health Checks**: Automatic failure detection
+- **CloudWatch Dashboard**: Pre-configured monitoring dashboard
+- **ECS Container Insights**: Detailed container performance metrics
+- **Load Balancer Metrics**: Request count, response times, error rates
 - **Auto Scaling**: Scales based on CPU/Memory usage
 
 ## 🛠️ Development
@@ -130,11 +132,46 @@ cd plutus
 docker build -t plutus-voice-agent .
 ```
 
+### Infrastructure Development
+
+```bash
+cd infrastructure/cdk
+
+# Synthesize CloudFormation template
+npx cdk synth
+
+# Show differences
+npx cdk diff
+
+# Deploy to development
+npx cdk deploy PlutusInfrastructureStack-dev
+```
+
+## 🔒 Security Features
+
+- **Private Subnets**: Application runs in private subnets
+- **IAM Roles**: Least privilege access for ECS tasks
+- **Secrets Manager**: Encrypted storage for API keys
+- **Security Groups**: Network-level security controls
+- **HTTPS**: Load balancer supports HTTPS (with certificate)
+
+## 💰 Cost Optimization
+
+- **Fargate Spot**: Optional spot instances for cost savings
+- **Auto Scaling**: Scales down during low usage
+- **Single NAT Gateway**: Cost-optimized VPC design
+- **Resource Sizing**: Environment-specific resource allocation
+
+### Estimated Monthly Costs (us-east-1)
+- **Development**: ~$50-100/month
+- **Production**: ~$200-500/month (depending on usage)
+
 ## 📚 Documentation
 
 - [Application Documentation](plutus/README.md)
 - [Infrastructure Documentation](infrastructure/README.md)
 - [Layercode Documentation](https://docs.layercode.com/)
+- [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/)
 
 ## 🤝 Contributing
 
@@ -142,7 +179,38 @@ docker build -t plutus-voice-agent .
 2. Create a feature branch
 3. Make your changes
 4. Add tests
-5. Submit a pull request
+5. Test infrastructure changes locally with `npx cdk synth`
+6. Submit a pull request
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+1. **CDK Bootstrap Required**
+   ```bash
+   npx cdk bootstrap
+   ```
+
+2. **Insufficient IAM Permissions**
+   - Ensure your AWS user/role has necessary permissions
+   - Check CloudFormation, ECS, VPC, and IAM permissions
+
+3. **Container Health Check Failures**
+   - Verify the `/api/health` endpoint is working
+   - Check application logs in CloudWatch
+
+### Useful Commands
+
+```bash
+# Check ECS service status
+aws ecs describe-services --cluster plutus-cluster-dev --services plutus-service-dev
+
+# View CloudWatch logs
+aws logs tail /aws/ecs/plutus --follow
+
+# Check load balancer health
+aws elbv2 describe-target-health --target-group-arn <target-group-arn>
+```
 
 ## 📄 License
 

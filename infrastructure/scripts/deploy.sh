@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Plutus Voice Agent AWS Deployment Script
-# This script sets up the complete CI/CD pipeline on AWS
+# Plutus Voice Agent AWS CDK Deployment Script
+# This script deploys the complete infrastructure using AWS CDK
 
 set -e
 
@@ -38,8 +38,8 @@ check_prerequisites() {
         exit 1
     fi
     
-    if ! command -v terraform &> /dev/null; then
-        print_error "Terraform is not installed. Please install it first."
+    if ! command -v node &> /dev/null; then
+        print_error "Node.js is not installed. Please install Node.js 18+ first."
         exit 1
     fi
     
@@ -63,98 +63,130 @@ check_aws_credentials() {
     print_success "AWS credentials are configured"
 }
 
-# Initialize Terraform
-init_terraform() {
-    print_status "Initializing Terraform..."
+# Bootstrap CDK if needed
+bootstrap_cdk() {
+    print_status "Checking CDK bootstrap status..."
     
-    cd terraform
+    if ! aws cloudformation describe-stacks --stack-name CDKToolkit &> /dev/null; then
+        print_warning "CDK not bootstrapped. Bootstrapping now..."
+        npx cdk bootstrap
+        print_success "CDK bootstrapped successfully"
+    else
+        print_success "CDK already bootstrapped"
+    fi
+}
+
+# Install CDK dependencies
+install_dependencies() {
+    print_status "Installing CDK dependencies..."
     
-    if [ ! -f "terraform.tfvars" ]; then
-        print_warning "terraform.tfvars not found. Please copy terraform.tfvars.example and update the values."
+    if [ ! -f "package.json" ]; then
+        print_error "package.json not found. Please run this script from the cdk directory."
         exit 1
     fi
     
-    terraform init
-    print_success "Terraform initialized"
+    npm install
+    print_success "Dependencies installed"
 }
 
 # Deploy infrastructure
 deploy_infrastructure() {
-    print_status "Deploying infrastructure..."
+    local environment=$1
     
-    terraform plan -out=tfplan
-    terraform apply tfplan
+    print_status "Deploying infrastructure for environment: $environment"
+    
+    # Synthesize the CloudFormation template
+    print_status "Synthesizing CloudFormation template..."
+    npx cdk synth
+    
+    # Deploy the stack
+    print_status "Deploying CDK stack..."
+    npx cdk deploy PlutusInfrastructureStack-$environment --require-approval never
     
     print_success "Infrastructure deployed successfully"
 }
 
 # Store secrets in AWS Secrets Manager
 store_secrets() {
+    local environment=$1
+    
     print_status "Storing secrets in AWS Secrets Manager..."
     
-    # Get the secret ARNs from Terraform output
-    GOOGLE_API_SECRET_ARN=$(terraform output -raw google_api_secret_arn 2>/dev/null || echo "")
-    LAYERCODE_API_SECRET_ARN=$(terraform output -raw layercode_api_secret_arn 2>/dev/null || echo "")
-    LAYERCODE_WEBHOOK_SECRET_ARN=$(terraform output -raw layercode_webhook_secret_arn 2>/dev/null || echo "")
+    SECRET_NAME="plutus-app-secrets-$environment"
     
-    # Store Google API Key
+    # Check if secret exists
+    if ! aws secretsmanager describe-secret --secret-id "$SECRET_NAME" &> /dev/null; then
+        print_error "Secret $SECRET_NAME not found. Please ensure the infrastructure is deployed first."
+        return 1
+    fi
+    
+    # Prepare secret values
+    SECRET_VALUES="{}"
+    
+    # Add Google API Key if provided
     if [ -n "$GOOGLE_GENERATIVE_AI_API_KEY" ]; then
-        aws secretsmanager put-secret-value \
-            --secret-id "$GOOGLE_API_SECRET_ARN" \
-            --secret-string "{\"GOOGLE_GENERATIVE_AI_API_KEY\":\"$GOOGLE_GENERATIVE_AI_API_KEY\"}"
-        print_success "Google API key stored"
+        SECRET_VALUES=$(echo "$SECRET_VALUES" | jq --arg key "$GOOGLE_GENERATIVE_AI_API_KEY" '.GOOGLE_GENERATIVE_AI_API_KEY = $key')
+        print_success "Google API key will be stored"
     else
         print_warning "GOOGLE_GENERATIVE_AI_API_KEY not set. Please set it manually in AWS Secrets Manager."
     fi
     
-    # Store Layercode API Key
+    # Add Layercode API Key if provided
     if [ -n "$LAYERCODE_API_KEY" ]; then
-        aws secretsmanager put-secret-value \
-            --secret-id "$LAYERCODE_API_SECRET_ARN" \
-            --secret-string "{\"LAYERCODE_API_KEY\":\"$LAYERCODE_API_KEY\"}"
-        print_success "Layercode API key stored"
+        SECRET_VALUES=$(echo "$SECRET_VALUES" | jq --arg key "$LAYERCODE_API_KEY" '.LAYERCODE_API_KEY = $key')
+        print_success "Layercode API key will be stored"
     else
         print_warning "LAYERCODE_API_KEY not set. Please set it manually in AWS Secrets Manager."
     fi
     
-    # Store Layercode Webhook Secret
+    # Add Layercode Webhook Secret if provided
     if [ -n "$LAYERCODE_WEBHOOK_SECRET" ]; then
-        aws secretsmanager put-secret-value \
-            --secret-id "$LAYERCODE_WEBHOOK_SECRET_ARN" \
-            --secret-string "{\"LAYERCODE_WEBHOOK_SECRET\":\"$LAYERCODE_WEBHOOK_SECRET\"}"
-        print_success "Layercode webhook secret stored"
+        SECRET_VALUES=$(echo "$SECRET_VALUES" | jq --arg key "$LAYERCODE_WEBHOOK_SECRET" '.LAYERCODE_WEBHOOK_SECRET = $key')
+        print_success "Layercode webhook secret will be stored"
     else
         print_warning "LAYERCODE_WEBHOOK_SECRET not set. Please set it manually in AWS Secrets Manager."
     fi
-}
-
-# Setup GitHub connection
-setup_github_connection() {
-    print_status "Setting up GitHub connection..."
     
-    GITHUB_CONNECTION_ARN=$(terraform output -raw github_connection_arn)
-    
-    print_warning "Please complete the GitHub connection setup:"
-    echo "1. Go to AWS CodePipeline console"
-    echo "2. Find the connection with ARN: $GITHUB_CONNECTION_ARN"
-    echo "3. Click 'Pending' and complete the authorization"
-    echo "4. Run this script again after completing the connection"
-    
-    read -p "Press Enter after completing the GitHub connection setup..."
+    # Update the secret
+    if [ "$SECRET_VALUES" != "{}" ]; then
+        aws secretsmanager put-secret-value \
+            --secret-id "$SECRET_NAME" \
+            --secret-string "$SECRET_VALUES"
+        print_success "Secrets stored successfully"
+    fi
 }
 
 # Test the deployment
 test_deployment() {
+    local environment=$1
+    
     print_status "Testing deployment..."
     
-    ALB_DNS_NAME=$(terraform output -raw alb_dns_name)
+    # Get the load balancer DNS name from CloudFormation outputs
+    STACK_NAME="PlutusInfrastructureStack-$environment"
+    ALB_DNS_NAME=$(aws cloudformation describe-stacks \
+        --stack-name "$STACK_NAME" \
+        --query 'Stacks[0].Outputs[?OutputKey==`LoadBalancerDNSName`].OutputValue' \
+        --output text)
     
-    print_status "Testing health endpoint..."
+    if [ -z "$ALB_DNS_NAME" ] || [ "$ALB_DNS_NAME" == "None" ]; then
+        print_error "Could not retrieve load balancer DNS name"
+        return 1
+    fi
+    
+    print_status "Testing health endpoint at http://$ALB_DNS_NAME/api/health..."
+    
+    # Wait for the service to be ready
+    print_status "Waiting for service to be ready..."
+    sleep 30
+    
+    # Test health endpoint
     if curl -f "http://$ALB_DNS_NAME/api/health" > /dev/null 2>&1; then
         print_success "Health check passed"
     else
-        print_error "Health check failed"
-        return 1
+        print_warning "Health check failed - service may still be starting up"
+        print_status "You can check the service status with:"
+        echo "aws ecs describe-services --cluster plutus-cluster-$environment --services plutus-service-$environment"
     fi
     
     print_success "Deployment test completed"
@@ -162,14 +194,33 @@ test_deployment() {
 
 # Display deployment information
 show_deployment_info() {
+    local environment=$1
+    
     print_status "Deployment Information:"
     
-    ALB_DNS_NAME=$(terraform output -raw alb_dns_name)
-    ECR_REPO_URL=$(terraform output -raw ecr_repository_url)
+    STACK_NAME="PlutusInfrastructureStack-$environment"
+    
+    # Get outputs from CloudFormation
+    ALB_DNS_NAME=$(aws cloudformation describe-stacks \
+        --stack-name "$STACK_NAME" \
+        --query 'Stacks[0].Outputs[?OutputKey==`LoadBalancerDNSName`].OutputValue' \
+        --output text)
+    
+    ECR_REPO_URL=$(aws cloudformation describe-stacks \
+        --stack-name "$STACK_NAME" \
+        --query 'Stacks[0].Outputs[?OutputKey==`ECRRepositoryURL`].OutputValue' \
+        --output text)
+    
+    DASHBOARD_URL=$(aws cloudformation describe-stacks \
+        --stack-name "$STACK_NAME" \
+        --query 'Stacks[0].Outputs[?OutputKey==`CloudWatchDashboardURL`].OutputValue' \
+        --output text)
     
     echo ""
+    echo "Environment: $environment"
     echo "Application Load Balancer: http://$ALB_DNS_NAME"
     echo "ECR Repository: $ECR_REPO_URL"
+    echo "CloudWatch Dashboard: $DASHBOARD_URL"
     echo ""
     echo "API Endpoints:"
     echo "  Health Check: http://$ALB_DNS_NAME/api/health"
@@ -179,44 +230,65 @@ show_deployment_info() {
     echo "Next Steps:"
     echo "1. Update your Layercode pipeline webhook URL to: http://$ALB_DNS_NAME/api/agent"
     echo "2. Update your frontend authorize endpoint to: http://$ALB_DNS_NAME/api/authorize"
-    echo "3. Push code to your GitHub repository to trigger the CI/CD pipeline"
+    echo "3. Configure secrets in AWS Secrets Manager (secret name: plutus-app-secrets-$environment)"
+    echo "4. Monitor your deployment in CloudWatch: $DASHBOARD_URL"
     echo ""
+}
+
+# Show usage
+show_usage() {
+    echo "Usage: $0 <environment>"
+    echo ""
+    echo "Environments:"
+    echo "  dev     - Development environment (1 instance, minimal resources)"
+    echo "  staging - Staging environment (2 instances, production-like)"
+    echo "  prod    - Production environment (2+ instances, full resources)"
+    echo ""
+    echo "Examples:"
+    echo "  $0 dev"
+    echo "  $0 prod"
+    echo ""
+    echo "Environment Variables (optional):"
+    echo "  GOOGLE_GENERATIVE_AI_API_KEY - Your Google AI API key"
+    echo "  LAYERCODE_API_KEY           - Your Layercode API key"
+    echo "  LAYERCODE_WEBHOOK_SECRET    - Your Layercode webhook secret"
 }
 
 # Main deployment function
 main() {
+    local environment=$1
+    
+    # Check if environment is provided
+    if [ -z "$environment" ]; then
+        print_error "Environment not specified"
+        show_usage
+        exit 1
+    fi
+    
+    # Validate environment
+    if [[ ! "$environment" =~ ^(dev|staging|prod)$ ]]; then
+        print_error "Invalid environment: $environment"
+        show_usage
+        exit 1
+    fi
+    
     echo "=========================================="
-    echo "Plutus Voice Agent AWS Deployment Script"
+    echo "Plutus Voice Agent AWS CDK Deployment"
+    echo "Environment: $environment"
     echo "=========================================="
     echo ""
     
     check_prerequisites
     check_aws_credentials
-    
-    # Check if we're in the right directory
-    if [ ! -f "terraform/main.tf" ]; then
-        print_error "Please run this script from the infrastructure directory"
-        exit 1
-    fi
-    
-    # Initialize and deploy infrastructure
-    init_terraform
-    deploy_infrastructure
-    
-    # Store secrets
-    store_secrets
-    
-    # Setup GitHub connection
-    setup_github_connection
-    
-    # Test deployment
-    test_deployment
-    
-    # Show deployment information
-    show_deployment_info
+    bootstrap_cdk
+    install_dependencies
+    deploy_infrastructure "$environment"
+    store_secrets "$environment"
+    test_deployment "$environment"
+    show_deployment_info "$environment"
     
     print_success "Deployment completed successfully!"
 }
 
-# Run main function
+# Run main function with all arguments
 main "$@" 
