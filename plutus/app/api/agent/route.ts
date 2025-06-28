@@ -7,8 +7,20 @@ import { streamResponse, verifySignature } from '@layercode/node-server-sdk';
 import { withEnhancedLogging } from '../../../lib/request-logger';
 import logger from '../../../lib/logger';
 
+// Check for required environment variables
+const googleApiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+const layercodeWebhookSecret = process.env.LAYERCODE_WEBHOOK_SECRET;
+
+if (!googleApiKey) {
+  logger.error('❌ GOOGLE_GENERATIVE_AI_API_KEY environment variable is missing');
+}
+
+if (!layercodeWebhookSecret) {
+  logger.error('❌ LAYERCODE_WEBHOOK_SECRET environment variable is missing');
+}
+
 const google = createGoogleGenerativeAI({
-  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+  apiKey: googleApiKey || 'missing-api-key',
 });
 
 const SYSTEM_PROMPT =
@@ -19,8 +31,14 @@ async function agentHandler(request: Request) {
   const requestBody = await request.json();
   
   const signature = request.headers.get('layercode-signature') || '';
-  const secret = process.env.LAYERCODE_WEBHOOK_SECRET || '';
+  const secret = layercodeWebhookSecret || '';
   const payload = JSON.stringify(requestBody);
+  
+  if (!secret) {
+    logger.error('Cannot verify webhook signature - LAYERCODE_WEBHOOK_SECRET is missing');
+    return new Response('Server configuration error', { status: 500 });
+  }
+  
   const isValid = verifySignature({ payload, signature, secret });
 
   if (!isValid) {
@@ -33,6 +51,13 @@ async function agentHandler(request: Request) {
   }
 
   return streamResponse(requestBody, async ({ stream }) => {
+    if (!googleApiKey) {
+      logger.error('Cannot generate AI response - GOOGLE_GENERATIVE_AI_API_KEY is missing');
+      stream.tts('I apologize, but I am currently experiencing technical difficulties. Please try again later.');
+      stream.end();
+      return;
+    }
+    
     const { textStream } = streamText({
       model: google('gemini-2.0-flash-001'),
       system: SYSTEM_PROMPT,
@@ -41,7 +66,15 @@ async function agentHandler(request: Request) {
         // Extract and process the complete AI response from the assistant's message
         const assistantMessage = response.messages.find(msg => msg.role === 'assistant');
         let aiResponse = 'No text response generated';
-        let nonTextContent: any[] = [];
+        const nonTextContent: Array<{
+          type: string;
+          toolName?: string;
+          toolCallId?: string;
+          args?: unknown;
+          part?: unknown;
+          fileId?: string;
+          fileName?: string;
+        }> = [];
         
         if (assistantMessage?.content) {
           // Handle content which can be string or array of parts

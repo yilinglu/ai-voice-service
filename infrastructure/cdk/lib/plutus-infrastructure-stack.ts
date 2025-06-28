@@ -16,21 +16,66 @@ import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as kms from 'aws-cdk-lib/aws-kms';
+import * as ecr from 'aws-cdk-lib/aws-ecr';
+import { execSync } from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export interface PlutusInfrastructureStackProps extends cdk.StackProps {
   environment: string;
+  domainName?: string;
+  subdomain?: string;
+  imageTag?: string; // Optional: if not provided, will use 'latest'
 }
 
 export class PlutusInfrastructureStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: PlutusInfrastructureStackProps) {
     super(scope, id, props);
 
-    const { environment } = props;
+    const { environment, domainName, subdomain, imageTag = 'latest' } = props;
+
+    // Validate secrets before proceeding with deployment
+    this.validateSecrets(environment);
+
+    // Import hosted zone and certificate if subdomain is provided
+    let hostedZone: route53.IHostedZone | undefined;
+    let certificate: acm.ICertificate | undefined;
+
+    if (subdomain && domainName) {
+      const fullDomain = `${subdomain}.${domainName}`;
+      
+      console.log(`Setting up for subdomain: ${subdomain}`);
+      console.log(`Full domain: ${fullDomain}`);
+      
+      // Use hosted zone ID directly from the domain infrastructure stack
+      const hostedZoneId = cdk.Fn.importValue(`plutus-hosted-zone-id-${subdomain}`);
+      hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, `HostedZone${subdomain}`, {
+        hostedZoneId: hostedZoneId,
+        zoneName: fullDomain,
+      });
+      
+      // Use certificate ARN directly from the domain infrastructure stack
+      const certificateArn = cdk.Fn.importValue(`plutus-certificate-arn-${subdomain}`);
+      certificate = acm.Certificate.fromCertificateArn(
+        this,
+        `Certificate${subdomain}`,
+        certificateArn
+      );
+      
+      console.log(`Hosted zone ID: ${hostedZoneId}`);
+      console.log(`Certificate ARN: ${certificateArn}`);
+    }
+
+    console.log(`Using Docker image tag: ${imageTag}`);
 
     // VPC Configuration
     const vpc = new ec2.Vpc(this, 'PlutusVPC', {
       maxAzs: 2,
-      natGateways: 1, // Cost optimization: single NAT gateway
+      natGateways: 1, // Add NAT Gateway for private subnets
+      vpcName: `plutus-vpc-${environment}`,
+      enableDnsHostnames: true,
+      enableDnsSupport: true,
       subnetConfiguration: [
         {
           cidrMask: 24,
@@ -45,177 +90,184 @@ export class PlutusInfrastructureStack extends cdk.Stack {
       ],
     });
 
-    // Secrets Manager for environment variables
-    const appSecrets = new secretsmanager.Secret(this, 'PlutusAppSecrets', {
-      secretName: `plutus-app-secrets-${environment}`,
-      description: 'Secrets for Plutus voice agent application',
-      generateSecretString: {
-        secretStringTemplate: JSON.stringify({
-          LAYERCODE_API_KEY: 'your_layercode_api_key_here',
-          LAYERCODE_WEBHOOK_SECRET: 'your_webhook_secret_here',
-          GOOGLE_GENERATIVE_AI_API_KEY: 'your_google_ai_api_key_here',
-        }),
-        generateStringKey: 'password',
-      },
-    });
+    // VPC Endpoints for enhanced security (for staging and production)
+    if (environment === 'staging' || environment === 'prod') {
+      // Secrets Manager VPC Endpoint
+      new ec2.InterfaceVpcEndpoint(this, 'SecretsManagerEndpoint', {
+        vpc,
+        service: ec2.InterfaceVpcEndpointAwsService.SECRETS_MANAGER,
+        subnets: {
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+        },
+      });
+
+      // CloudWatch Logs VPC Endpoint
+      new ec2.InterfaceVpcEndpoint(this, 'CloudWatchLogsEndpoint', {
+        vpc,
+        service: ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS,
+        subnets: {
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+        },
+      });
+
+      // ECR VPC Endpoint
+      new ec2.InterfaceVpcEndpoint(this, 'ECREndpoint', {
+        vpc,
+        service: ec2.InterfaceVpcEndpointAwsService.ECR,
+        subnets: {
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+        },
+      });
+
+      // ECR Docker VPC Endpoint
+      new ec2.InterfaceVpcEndpoint(this, 'ECRDockerEndpoint', {
+        vpc,
+        service: ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER,
+        subnets: {
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+        },
+      });
+    }
+
+    // ECR Repository for the application
+    const repository = ecr.Repository.fromRepositoryName(
+      this,
+      'PlutusRepository',
+      'plutus-server'
+    );
 
     // ECS Cluster
     const cluster = new ecs.Cluster(this, 'PlutusCluster', {
       vpc,
       clusterName: `plutus-cluster-${environment}`,
       containerInsights: true,
-      enableFargateCapacityProviders: true,
     });
 
-    // Task Definition
-    const taskDefinition = new ecs.FargateTaskDefinition(this, 'PlutusTaskDef', {
-      memoryLimitMiB: 1024,
-      cpu: 512,
-      executionRole: this.createExecutionRole(),
-      taskRole: this.createTaskRole(),
-    });
+    // Domain and SSL Certificate setup
+    let domainNameFull: string | undefined;
+    let domainNameForALB: string | undefined;
 
-    // Container Definition
-    const container = taskDefinition.addContainer('PlutusContainer', {
-      image: ecs.ContainerImage.fromAsset('../plutus'),
-      containerName: 'plutus-app',
-      logging: ecs.LogDrivers.awsLogs({
-        streamPrefix: 'plutus',
-        logRetention: logs.RetentionDays.ONE_MONTH,
-      }),
-      environment: {
-        NODE_ENV: environment,
-        PORT: '3000',
-      },
-      secrets: {
-        LAYERCODE_API_KEY: ecs.Secret.fromSecretsManager(appSecrets, 'LAYERCODE_API_KEY'),
-        LAYERCODE_WEBHOOK_SECRET: ecs.Secret.fromSecretsManager(appSecrets, 'LAYERCODE_WEBHOOK_SECRET'),
-        GOOGLE_GENERATIVE_AI_API_KEY: ecs.Secret.fromSecretsManager(appSecrets, 'GOOGLE_GENERATIVE_AI_API_KEY'),
-      },
-      healthCheck: {
-        command: ['CMD-SHELL', 'curl -f http://localhost:3000/api/health || exit 1'],
-        interval: cdk.Duration.seconds(30),
-        timeout: cdk.Duration.seconds(5),
-        retries: 3,
-        startPeriod: cdk.Duration.seconds(60),
-      },
-    });
+    if (domainName && subdomain) {
+      domainNameFull = `${subdomain}.${domainName}`;
+      domainNameForALB = domainNameFull; // Use the full domain name for ALB
+    }
 
-    container.addPortMappings({
-      containerPort: 3000,
-      protocol: ecs.Protocol.TCP,
-    });
-
-    // Application Load Balancer
-    const loadBalancer = new elbv2.ApplicationLoadBalancer(this, 'PlutusALB', {
-      vpc,
-      internetFacing: true,
-      loadBalancerName: `plutus-alb-${environment}`,
-    });
-
-    // Target Group
-    const targetGroup = new elbv2.ApplicationTargetGroup(this, 'PlutusTargetGroup', {
-      vpc,
-      port: 3000,
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      targetType: elbv2.TargetType.IP,
-      healthCheck: {
-        path: '/api/health',
-        healthyHttpCodes: '200',
-        interval: cdk.Duration.seconds(30),
-        timeout: cdk.Duration.seconds(5),
-        healthyThresholdCount: 2,
-        unhealthyThresholdCount: 3,
-      },
-    });
-
-    // Listener
-    const listener = loadBalancer.addListener('PlutusListener', {
-      port: 80,
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      defaultAction: elbv2.ListenerAction.forward([targetGroup]),
-    });
-
-    // ECS Service
-    const service = new ecs.FargateService(this, 'PlutusService', {
-      cluster,
-      taskDefinition,
-      serviceName: `plutus-service-${environment}`,
-      desiredCount: environment === 'prod' ? 2 : 1,
-      assignPublicIp: false, // Use private subnets for security
-      vpcSubnets: {
-        subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-      },
-    });
-
-    // Attach service to target group
-    service.attachToApplicationTargetGroup(targetGroup);
+    // Create the Fargate service with Application Load Balancer
+    const loadBalancedFargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(
+      this,
+      'PlutusService',
+      {
+        memoryLimitMiB: 1024,
+        cpu: 512,
+        desiredCount: 1,
+        taskImageOptions: {
+          image: ecs.ContainerImage.fromEcrRepository(repository, imageTag),
+          containerPort: 3000,
+          environment: {
+            NODE_ENV: environment,
+            NEXT_PUBLIC_LAYERCODE_PIPELINE_ID: 'g0yw0o69',
+          },
+          secrets: {
+            LAYERCODE_API_KEY: ecs.Secret.fromSecretsManager(
+              secretsmanager.Secret.fromSecretCompleteArn(this, 'LayercodeApiKey', 'arn:aws:secretsmanager:us-east-1:526623580264:secret:layercode/api-key-Ziikpm')
+            ),
+            LAYERCODE_WEBHOOK_SECRET: ecs.Secret.fromSecretsManager(
+              secretsmanager.Secret.fromSecretCompleteArn(this, 'LayercodeWebhookSecret', 'arn:aws:secretsmanager:us-east-1:526623580264:secret:layercode/webhook-secret-GaX56e')
+            ),
+            GOOGLE_GENERATIVE_AI_API_KEY: ecs.Secret.fromSecretsManager(
+              secretsmanager.Secret.fromSecretCompleteArn(this, 'GoogleGenerativeAIKey', 'arn:aws:secretsmanager:us-east-1:526623580264:secret:google/generative-ai-key-K9jUHu')
+            ),
+          },
+          logDriver: ecs.LogDrivers.awsLogs({
+            streamPrefix: 'plutus',
+            logRetention: logs.RetentionDays.ONE_MONTH,
+          }),
+          executionRole: this.createExecutionRole(),
+          taskRole: this.createTaskRole(),
+        },
+        cluster,
+        domainName: domainNameForALB,
+        domainZone: hostedZone,
+        certificate,
+        protocol: domainName && subdomain ? elbv2.ApplicationProtocol.HTTPS : elbv2.ApplicationProtocol.HTTP,
+        redirectHTTP: domainName && subdomain ? true : false,
+        publicLoadBalancer: true,
+        loadBalancerName: `plutus-alb-${environment}`,
+        serviceName: `plutus-service-${environment}`,
+      }
+    );
 
     // Auto Scaling
-    const scaling = service.autoScaleTaskCount({
-      minCapacity: environment === 'prod' ? 2 : 1,
-      maxCapacity: environment === 'prod' ? 10 : 3,
+    const scaling = loadBalancedFargateService.service.autoScaleTaskCount({
+      maxCapacity: 10,
+      minCapacity: 1,
     });
 
-    // Scale up on CPU utilization
     scaling.scaleOnCpuUtilization('CpuScaling', {
       targetUtilizationPercent: 70,
       scaleInCooldown: cdk.Duration.seconds(60),
       scaleOutCooldown: cdk.Duration.seconds(60),
     });
 
-    // Scale up on memory utilization
     scaling.scaleOnMemoryUtilization('MemoryScaling', {
-      targetUtilizationPercent: 80,
+      targetUtilizationPercent: 70,
       scaleInCooldown: cdk.Duration.seconds(60),
       scaleOutCooldown: cdk.Duration.seconds(60),
     });
 
-    // Security Group for the service
-    const serviceSecurityGroup = new ec2.SecurityGroup(this, 'PlutusServiceSG', {
-      vpc,
-      description: 'Security group for Plutus ECS service',
-      allowAllOutbound: true,
+    // CloudWatch Dashboard
+    const dashboard = new cloudwatch.Dashboard(this, 'PlutusDashboard', {
+      dashboardName: `plutus-dashboard-${environment}`,
     });
 
-    serviceSecurityGroup.addIngressRule(
-      ec2.Peer.anyIpv4(),
-      ec2.Port.tcp(3000),
-      'Allow inbound traffic to Plutus app'
+    // Add metrics to dashboard
+    dashboard.addWidgets(
+      new cloudwatch.GraphWidget({
+        title: 'CPU Utilization',
+        left: [loadBalancedFargateService.service.metricCpuUtilization()],
+        right: [loadBalancedFargateService.service.metricMemoryUtilization()],
+      }),
+      new cloudwatch.GraphWidget({
+        title: 'Request Count',
+        left: [loadBalancedFargateService.loadBalancer.metrics.requestCount()],
+      }),
+      new cloudwatch.GraphWidget({
+        title: 'Target Response Time',
+        left: [loadBalancedFargateService.loadBalancer.metrics.targetResponseTime()],
+      })
     );
-
-    service.connections.addSecurityGroup(serviceSecurityGroup);
-
-    // CloudWatch Dashboard
-    this.createCloudWatchDashboard(cluster, service, loadBalancer, environment);
-
-    // CI/CD Pipeline (optional - can be enabled later)
-    // this.createCICDPipeline(environment);
 
     // Outputs
     new cdk.CfnOutput(this, 'LoadBalancerDNS', {
-      value: loadBalancer.loadBalancerDnsName,
-      description: 'DNS name of the load balancer',
-      exportName: `plutus-alb-dns-${environment}`,
+      value: loadBalancedFargateService.loadBalancer.loadBalancerDnsName,
+      description: 'Load Balancer DNS Name',
+      exportName: `plutus-loadbalancer-dns-${environment}`,
     });
 
     new cdk.CfnOutput(this, 'ServiceURL', {
-      value: `http://${loadBalancer.loadBalancerDnsName}`,
-      description: 'URL of the Plutus service',
+      value: domainName && subdomain 
+        ? `https://${domainNameFull}` 
+        : `http://${loadBalancedFargateService.loadBalancer.loadBalancerDnsName}`,
+      description: 'Service URL',
       exportName: `plutus-service-url-${environment}`,
     });
 
-    new cdk.CfnOutput(this, 'ClusterName', {
-      value: cluster.clusterName,
-      description: 'Name of the ECS cluster',
-      exportName: `plutus-cluster-name-${environment}`,
+    new cdk.CfnOutput(this, 'ECRRepositoryURI', {
+      value: repository.repositoryUri,
+      description: 'ECR Repository URI',
+      exportName: `plutus-ecr-repository-uri-${environment}`,
     });
 
-    new cdk.CfnOutput(this, 'SecretsName', {
-      value: appSecrets.secretName,
-      description: 'Name of the secrets in Secrets Manager',
-      exportName: `plutus-secrets-name-${environment}`,
+    new cdk.CfnOutput(this, 'DockerImageTag', {
+      value: imageTag,
+      description: 'Docker Image Tag',
+      exportName: `plutus-docker-image-tag-${environment}`,
     });
+
+    // Add tags
+    cdk.Tags.of(this).add('Environment', environment);
+    cdk.Tags.of(this).add('Service', 'plutus-voice-agent');
+    cdk.Tags.of(this).add('ManagedBy', 'cdk');
   }
 
   private createExecutionRole(): iam.Role {
@@ -250,81 +302,30 @@ export class PlutusInfrastructureStack extends cdk.Stack {
     });
   }
 
-  private createCloudWatchDashboard(
-    cluster: ecs.Cluster,
-    service: ecs.FargateService,
-    loadBalancer: elbv2.ApplicationLoadBalancer,
-    environment: string
-  ): void {
-    const dashboard = new cloudwatch.Dashboard(this, 'PlutusDashboard', {
-      dashboardName: `plutus-dashboard-${environment}`,
-    });
-
-    // ECS Service Metrics
-    dashboard.addWidgets(
-      new cloudwatch.GraphWidget({
-        title: 'ECS Service CPU Utilization',
-        left: [
-          service.metricCpuUtilization({
-            period: cdk.Duration.minutes(1),
-            statistic: 'Average',
-          }),
-        ],
-        width: 12,
-      }),
-      new cloudwatch.GraphWidget({
-        title: 'ECS Service Memory Utilization',
-        left: [
-          service.metricMemoryUtilization({
-            period: cdk.Duration.minutes(1),
-            statistic: 'Average',
-          }),
-        ],
-        width: 12,
-      })
-    );
-
-    // Load Balancer Metrics
-    dashboard.addWidgets(
-      new cloudwatch.GraphWidget({
-        title: 'Load Balancer Request Count',
-        left: [
-          loadBalancer.metricRequestCount({
-            period: cdk.Duration.minutes(1),
-            statistic: 'Sum',
-          }),
-        ],
-        width: 12,
-      }),
-      new cloudwatch.GraphWidget({
-        title: 'Load Balancer Response Time',
-        left: [
-          loadBalancer.metricTargetResponseTime({
-            period: cdk.Duration.minutes(1),
-            statistic: 'Average',
-          }),
-        ],
-        width: 12,
-      })
-    );
-
-    // Error Rate Widget
-    dashboard.addWidgets(
-      new cloudwatch.GraphWidget({
-        title: 'HTTP 5XX Error Rate',
-        left: [
-          loadBalancer.metricHttpCodeTarget(elbv2.HttpCodeTarget.TARGET_5XX_COUNT, {
-            period: cdk.Duration.minutes(1),
-            statistic: 'Sum',
-          }),
-        ],
-        width: 24,
-      })
-    );
-  }
-
   private createCICDPipeline(environment: string): void {
     // This method can be implemented later for CI/CD automation
     // It would include CodePipeline, CodeBuild, and GitHub integration
+  }
+
+  private validateSecrets(environment: string): void {
+    const requiredSecrets = [
+      'layercode/api-key',
+      'layercode/webhook-secret', 
+      'google/generative-ai-key'
+    ];
+
+    console.log(`🔍 Validating secrets for environment: ${environment}`);
+    
+    requiredSecrets.forEach(secretName => {
+      try {
+        const secret = secretsmanager.Secret.fromSecretNameV2(this, `SecretValidation-${secretName.replace('/', '-')}`, secretName);
+        console.log(`✅ Secret validated: ${secretName}`);
+      } catch (error) {
+        console.error(`❌ Secret validation failed: ${secretName}`);
+        throw new Error(`Required secret '${secretName}' not found or not accessible`);
+      }
+    });
+    
+    console.log('🎉 All secrets validated successfully');
   }
 } 

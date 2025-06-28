@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Plutus Infrastructure Deployment Script
-# This script deploys the Plutus voice agent infrastructure using AWS CDK
+# Supports staging and production environments with custom domains
 
-set -e  # Exit on any error
+set -e
 
 # Colors for output
 RED='\033[0;31m'
@@ -49,159 +49,184 @@ check_aws_config() {
     print_success "AWS CLI is configured"
 }
 
-# Function to check Node.js and npm
-check_node_requirements() {
-    if ! command_exists node; then
-        print_error "Node.js is not installed. Please install it first."
+# Function to check CDK installation
+check_cdk() {
+    if ! command_exists cdk; then
+        print_error "AWS CDK is not installed. Please install it first: npm install -g aws-cdk-cli"
         exit 1
     fi
 
-    if ! command_exists npm; then
-        print_error "npm is not installed. Please install it first."
+    print_success "AWS CDK is installed"
+}
+
+# Function to validate environment
+validate_environment() {
+    local env=$1
+    case $env in
+        staging|prod)
+            return 0
+            ;;
+        *)
+            print_error "Invalid environment: $env. Must be one of: staging, prod"
+            exit 1
+            ;;
+    esac
+}
+
+# Function to check domain setup
+check_domain_setup() {
+    local env=$1
+    local domain_name=${2:-"dragon0.com"}
+    
+    if [[ "$env" == "staging" || "$env" == "prod" ]]; then
+        print_status "Checking domain setup for $env environment..."
+        
+        # Check if hosted zone exists
+        if ! aws route53 list-hosted-zones --query "HostedZones[?Name=='$domain_name.']" --output text | grep -q "$domain_name"; then
+            print_warning "Hosted zone for $domain_name not found in Route53"
+            print_warning "Please ensure your domain is properly configured in Route53"
+            print_warning "You can create a hosted zone manually in the AWS Console"
+            read -p "Continue anyway? (y/N): " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                exit 1
+            fi
+        else
+            print_success "Hosted zone for $domain_name found"
+        fi
+    fi
+}
+
+# Function to verify secrets before deployment
+verify_secrets() {
+    local env=$1
+    
+    print_status "Verifying secrets before deployment..."
+    
+    # Run the secret verification script
+    if ! ./scripts/verify-secrets.sh "$env"; then
+        print_error "Secret verification failed. Please fix the secrets before deploying."
         exit 1
     fi
-
-    print_success "Node.js and npm are available"
-}
-
-# Function to install dependencies
-install_dependencies() {
-    print_status "Installing CDK dependencies..."
-    npm install
-    print_success "Dependencies installed"
-}
-
-# Function to bootstrap CDK (if needed)
-bootstrap_cdk() {
-    print_status "Checking if CDK is bootstrapped..."
-    if ! aws cloudformation describe-stacks --stack-name CDKToolkit >/dev/null 2>&1; then
-        print_warning "CDK is not bootstrapped. Bootstrapping now..."
-        npx cdk bootstrap
-        print_success "CDK bootstrapped successfully"
-    else
-        print_success "CDK is already bootstrapped"
-    fi
+    
+    print_success "Secrets verification completed"
 }
 
 # Function to deploy infrastructure
 deploy_infrastructure() {
-    local environment=$1
+    local env=$1
+    local domain_name=${2:-"dragon0.com"}
     
-    print_status "Deploying infrastructure for environment: $environment"
+    print_status "Deploying to $env environment..."
     
-    # Set environment variable for CDK
-    export ENVIRONMENT=$environment
+    # Set environment variables
+    export ENVIRONMENT=$env
+    export DOMAIN_NAME=$domain_name
     
-    # Synthesize the CloudFormation template
-    print_status "Synthesizing CloudFormation template..."
-    npx cdk synth
+    # Navigate to CDK directory
+    cd "$(dirname "$0")/.."
     
-    # Deploy the stack
-    print_status "Deploying CDK stack..."
-    npx cdk deploy --all --require-approval never
-    
-    print_success "Infrastructure deployed successfully!"
-}
-
-# Function to show deployment outputs
-show_outputs() {
-    print_status "Retrieving deployment outputs..."
-    npx cdk list
-    print_success "Deployment completed. Check the outputs above for service URLs and other information."
-}
-
-# Function to update secrets
-update_secrets() {
-    local environment=$1
-    
-    print_status "Updating secrets for environment: $environment"
-    
-    # Get the secret name from the stack output
-    local secret_name=$(aws cloudformation describe-stacks \
-        --stack-name "PlutusInfrastructureStack-$environment" \
-        --query 'Stacks[0].Outputs[?OutputKey==`SecretsName`].OutputValue' \
-        --output text 2>/dev/null || echo "plutus-app-secrets-$environment")
-    
-    print_warning "Please update the secrets in AWS Secrets Manager: $secret_name"
-    print_warning "Required secrets:"
-    print_warning "  - LAYERCODE_API_KEY"
-    print_warning "  - LAYERCODE_WEBHOOK_SECRET"
-    print_warning "  - GOOGLE_GENERATIVE_AI_API_KEY"
-    
-    # Open Secrets Manager in browser if possible
-    if command_exists open; then
-        open "https://console.aws.amazon.com/secretsmanager/secret?name=$secret_name"
+    # Install dependencies if needed
+    if [[ ! -d "node_modules" ]]; then
+        print_status "Installing CDK dependencies..."
+        npm install
     fi
-}
-
-# Main deployment function
-main() {
-    local environment=${1:-dev}
     
-    print_status "Starting Plutus infrastructure deployment..."
-    print_status "Environment: $environment"
+    # Bootstrap CDK if needed
+    print_status "Checking CDK bootstrap..."
+    if ! cdk list >/dev/null 2>&1; then
+        print_status "Bootstrapping CDK..."
+        cdk bootstrap
+    fi
     
-    # Validate environment
-    if [[ ! "$environment" =~ ^(dev|staging|prod)$ ]]; then
-        print_error "Invalid environment. Must be one of: dev, staging, prod"
+    # Deploy the stack with context parameters and environment variable
+    print_status "Deploying infrastructure stack..."
+    print_status "Environment: $env"
+    print_status "Domain: $domain_name"
+    
+    # Use both context and environment variable for maximum reliability
+    ENVIRONMENT=$env cdk deploy --require-approval never -c environment=$env -c domainName=$domain_name
+    
+    if [[ $? -eq 0 ]]; then
+        print_success "Infrastructure deployed successfully!"
+    else
+        print_error "Infrastructure deployment failed!"
         exit 1
     fi
+}
+
+# Function to show deployment info
+show_deployment_info() {
+    local env=$1
+    local domain_name=${2:-"dragon0.com"}
+    
+    print_status "Deployment Information:"
+    echo "Environment: $env"
+    
+    if [[ "$env" == "staging" ]]; then
+        echo "URL: https://staging.$domain_name"
+    elif [[ "$env" == "prod" ]]; then
+        echo "URL: https://api.$domain_name"
+    else
+        echo "URL: http://<load-balancer-dns> (check CDK outputs)"
+    fi
+    
+    echo ""
+    print_status "Next steps:"
+    echo "1. Update secrets in AWS Secrets Manager"
+    echo "2. Configure your Layercode pipeline webhook URL"
+    echo "3. Test the deployment"
+}
+
+# Main script
+main() {
+    local env=${1:-"dev"}
+    local domain_name=${2:-"dragon0.com"}
+    
+    print_status "Starting Plutus infrastructure deployment..."
+    print_status "Environment: $env"
+    print_status "Domain: $domain_name"
+    
+    # Validate inputs
+    validate_environment "$env"
     
     # Check prerequisites
     check_aws_config
-    check_node_requirements
+    check_cdk
     
-    # Install dependencies
-    install_dependencies
+    # Check domain setup for staging/prod
+    check_domain_setup "$env" "$domain_name"
     
-    # Bootstrap CDK if needed
-    bootstrap_cdk
+    # Verify secrets before deployment
+    verify_secrets "$env"
     
     # Deploy infrastructure
-    deploy_infrastructure "$environment"
+    deploy_infrastructure "$env" "$domain_name"
     
-    # Show outputs
-    show_outputs
-    
-    # Update secrets
-    update_secrets "$environment"
-    
-    print_success "Deployment completed successfully!"
-    print_status "Next steps:"
-    print_status "1. Update the secrets in AWS Secrets Manager"
-    print_status "2. Configure your Layercode pipeline webhook URL"
-    print_status "3. Test the voice agent"
+    # Show deployment info
+    show_deployment_info "$env" "$domain_name"
 }
 
-# Function to show usage
-show_usage() {
-    echo "Usage: $0 [environment]"
+# Script usage
+usage() {
+    echo "Usage: $0 [environment] [domain_name]"
     echo ""
-    echo "Environments:"
-    echo "  dev      - Development environment (default)"
-    echo "  staging  - Staging environment"
-    echo "  prod     - Production environment"
+    echo "Arguments:"
+    echo "  environment   Deployment environment (dev|staging|prod) [default: dev]"
+    echo "  domain_name   Domain name for custom domains [default: dragon0.com]"
     echo ""
     echo "Examples:"
-    echo "  $0        # Deploy to dev environment"
-    echo "  $0 prod   # Deploy to production environment"
+    echo "  $0 dev                    # Deploy to dev environment"
+    echo "  $0 staging                # Deploy to staging with staging.dragon0.com"
+    echo "  $0 prod                   # Deploy to production with api.dragon0.com"
+    echo "  $0 staging mydomain.com   # Deploy to staging with staging.mydomain.com"
 }
 
-# Parse command line arguments
-case "${1:-}" in
-    -h|--help)
-        show_usage
-        exit 0
-        ;;
-    dev|staging|prod)
-        main "$1"
-        ;;
-    "")
-        main "dev"
-        ;;
-    *)
-        print_error "Invalid argument: $1"
-        show_usage
-        exit 1
-        ;;
-esac 
+# Check if help is requested
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    usage
+    exit 0
+fi
+
+# Run main function with arguments
+main "$@" 

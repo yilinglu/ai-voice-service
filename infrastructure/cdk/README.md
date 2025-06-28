@@ -1,274 +1,275 @@
-# Plutus Voice Agent - AWS CDK Infrastructure
+# Plutus Infrastructure with AWS CDK
 
-This directory contains the AWS CDK infrastructure code for deploying the Plutus voice agent service on AWS. The infrastructure is designed to be production-ready, scalable, and cost-effective.
+This directory contains the AWS CDK infrastructure code for the Plutus voice agent service. The infrastructure is split into two separate stacks for better management:
 
-## 🏗️ Architecture Overview
+## 🏗️ Infrastructure Components
 
-The CDK infrastructure creates a complete AWS environment with the following components:
+### 1. **Domain Infrastructure Stack** (`DomainInfrastructureStack`)
+- **Route53 Hosted Zone** - DNS management for your domain
+- **DNSSEC** - DNS Security Extensions for apex domain and all subdomains
+- **SSL Certificates** - Automatic certificate creation and renewal
+- **KMS Keys** - DNSSEC signing keys with proper IAM policies
 
-### Core Infrastructure
-- **VPC** - Isolated network with public and private subnets across 2 AZs
-- **ECS Fargate** - Serverless container hosting for the Plutus application
-- **Application Load Balancer** - Traffic distribution and health checks
-- **Auto Scaling** - Dynamic scaling based on CPU and memory utilization
-- **Secrets Manager** - Secure storage for API keys and sensitive data
+### 2. **Application Infrastructure Stack** (`PlutusInfrastructureStack`)
+- **VPC** - Virtual Private Cloud with public and private subnets
+- **ECS Fargate** - Containerized application deployment
+- **Application Load Balancer** - Traffic distribution and SSL termination
+- **Auto Scaling** - Automatic scaling based on CPU and memory usage
+- **CloudWatch** - Monitoring and logging
+- **Secrets Manager** - Secure storage for API keys and secrets
 
-### Monitoring & Observability
-- **CloudWatch Dashboard** - Real-time metrics and monitoring
-- **ECS Container Insights** - Detailed container performance metrics
-- **Load Balancer Metrics** - Request count, response times, error rates
+## 🚀 Deployment Strategy
 
-### Security
-- **Private Subnets** - Application runs in private subnets for security
-- **IAM Roles** - Least privilege access for ECS tasks
-- **Security Groups** - Network-level security controls
-- **Secrets Manager** - Encrypted storage of sensitive data
+The infrastructure is designed with **separated concerns**:
 
-## 🚀 Quick Start
+### **Domain Infrastructure** (Infrequent Changes)
+- Deployed once or when adding new domains/subdomains
+- Contains Route53, DNSSEC, SSL certificates
+- Stable and rarely changes
 
-### Prerequisites
+### **Application Infrastructure** (Frequent Changes)
+- Deployed with every application update
+- Contains ECS, ALB, auto-scaling, monitoring
+- Changes frequently with code updates
 
-1. **AWS CLI** - Configured with appropriate permissions
-2. **Node.js** - Version 18 or higher
-3. **AWS CDK** - Will be installed automatically
-4. **Docker** - For building the application container
+## 📋 Prerequisites
 
-### Installation
+1. **AWS CLI** installed and configured
+2. **AWS CDK** installed globally: `npm install -g aws-cdk`
+3. **Node.js** 18+ and npm
+4. **Domain registered** in Route53 (or elsewhere with Route53 hosted zone)
 
-1. **Navigate to the CDK directory:**
-   ```bash
-   cd infrastructure/cdk
-   ```
+## 🔧 Setup Instructions
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+### **Step 1: Prepare Domain Setup**
 
-3. **Deploy to development environment:**
-   ```bash
-   ./scripts/deploy.sh dev
-   ```
-
-### Environment Options
-
-- `dev` - Development environment (1 instance, minimal resources)
-- `staging` - Staging environment (2 instances, production-like)
-- `prod` - Production environment (2+ instances, full resources)
-
-## 📋 Deployment Process
-
-### 1. Bootstrap CDK (First Time Only)
-
-If this is your first time using CDK in your AWS account:
+Run the domain preparation script to check your domain setup:
 
 ```bash
-npx cdk bootstrap
+./scripts/prepare-domain.sh dragon0.com
 ```
 
-### 2. Deploy Infrastructure
+This script will:
+- ✅ Check if your domain has a Route53 hosted zone
+- ✅ Verify DNS records and name server configuration
+- ✅ Check DNSSEC status (will be enabled during deployment)
+- ✅ Show a summary of what will be created
+
+### **Step 2: Deploy Domain Infrastructure** (One-time setup)
+
+Deploy the domain infrastructure (Route53, DNSSEC, SSL certificates):
 
 ```bash
-# Deploy to development
-./scripts/deploy.sh dev
+# Deploy with default settings (dragon0.com, staging/api subdomains)
+./scripts/deploy-domain.sh
 
-# Deploy to production
-./scripts/deploy.sh prod
+# Or with custom domain and subdomains
+./scripts/deploy-domain.sh mydomain.com dev,staging,prod
 ```
 
-### 3. Configure Secrets
+This creates:
+- ✅ Route53 hosted zone configuration
+- ✅ DNSSEC enabled for apex domain and all subdomains
+- ✅ SSL certificates for all subdomains
+- ✅ KMS keys for DNSSEC signing
 
-After deployment, update the secrets in AWS Secrets Manager:
+### **Step 3: Deploy Application Infrastructure** (Frequent deployments)
 
-1. Navigate to AWS Secrets Manager in the console
-2. Find the secret named `plutus-app-secrets-{environment}`
-3. Update the following values:
-   - `LAYERCODE_API_KEY` - Your Layercode API key
-   - `LAYERCODE_WEBHOOK_SECRET` - Your Layercode webhook secret
-   - `GOOGLE_GENERATIVE_AI_API_KEY` - Your Google AI API key
+Deploy the application infrastructure:
 
-### 4. Configure Layercode Pipeline
+```bash
+# Deploy staging environment
+./scripts/deploy-app.sh staging
 
-1. Go to your Layercode dashboard
-2. Edit your pipeline's backend configuration
-3. Set the webhook URL to: `http://{load-balancer-dns}/api/agent`
+# Deploy production environment
+./scripts/deploy-app.sh prod
+```
 
-## 🔧 Infrastructure Components
+This creates:
+- ✅ VPC with public/private subnets
+- ✅ ECS Fargate service with auto-scaling
+- ✅ Application Load Balancer with SSL
+- ✅ CloudWatch monitoring and logging
+- ✅ DNS records pointing to your application
 
-### VPC Configuration
-- **2 Availability Zones** for high availability
-- **Public Subnets** for load balancer
-- **Private Subnets** for ECS tasks (security)
-- **Single NAT Gateway** for cost optimization
+## 🔐 Security Features
 
-### ECS Fargate Service
-- **CPU**: 512 units (0.5 vCPU)
-- **Memory**: 1024 MB
-- **Health Checks**: HTTP endpoint at `/api/health`
-- **Logging**: CloudWatch Logs with 1-month retention
+### SSL/TLS Certificates
+- Automatic SSL certificate creation and renewal via AWS Certificate Manager
+- Certificates are validated using DNS validation for security
+- Certificates are automatically attached to the Application Load Balancer
 
-### Auto Scaling
-- **CPU Scaling**: Scale up at 70% CPU utilization
-- **Memory Scaling**: Scale up at 80% memory utilization
-- **Scale Cooldown**: 60 seconds between scaling actions
-- **Capacity**: 1-3 instances (dev) / 2-10 instances (prod)
-
-### Load Balancer
-- **Health Check Path**: `/api/health`
-- **Health Check Interval**: 30 seconds
-- **Unhealthy Threshold**: 3 consecutive failures
-- **Healthy Threshold**: 2 consecutive successes
-
-## 📊 Monitoring
-
-### CloudWatch Dashboard
-
-The infrastructure automatically creates a CloudWatch dashboard with:
-
-- **ECS Service Metrics**
-  - CPU utilization
-  - Memory utilization
-  - Running task count
-
-- **Load Balancer Metrics**
-  - Request count
-  - Response time
-  - Error rates (4xx, 5xx)
-
-### Logs
-
-- **ECS Logs**: Available in CloudWatch Logs under `/aws/ecs/plutus`
-- **Load Balancer Logs**: Access logs can be enabled for detailed request tracking
-
-## 🔒 Security
+### DNSSEC Support
+- **DNSSEC (DNS Security Extensions)** is automatically enabled for the apex domain and all subdomains
+- Provides DNS authentication and integrity protection
+- Uses AWS KMS for key management with automatic key rotation
+- Protects against DNS spoofing and cache poisoning attacks
+- All DNS responses are cryptographically signed
+- Covers: `dragon0.com`, `staging.dragon0.com`, `api.dragon0.com`
 
 ### Network Security
-- ECS tasks run in private subnets
-- Load balancer in public subnets
-- Security groups restrict traffic to necessary ports only
+- VPC with private subnets for ECS tasks
+- Security groups with minimal required access
+- Application Load Balancer in public subnets with SSL termination
 
-### IAM Security
-- **Execution Role**: Minimal permissions for ECS task execution
-- **Task Role**: Permissions for CloudWatch logging
-- **Secrets Access**: Encrypted access to sensitive data
+## 🔄 Deployment Workflow
 
-### Data Security
-- All secrets stored in AWS Secrets Manager
-- Secrets are encrypted at rest and in transit
-- No sensitive data in environment variables
-
-## 💰 Cost Optimization
-
-### Resource Sizing
-- **Development**: Minimal resources (1 instance, 0.5 vCPU, 1GB RAM)
-- **Production**: Optimized for performance and reliability
-
-### Cost-Saving Features
-- **Single NAT Gateway**: Reduces NAT gateway costs
-- **Fargate Spot** (optional): Can be enabled for additional cost savings
-- **Auto Scaling**: Scales down during low usage periods
-
-### Estimated Costs (us-east-1)
-- **Development**: ~$50-100/month
-- **Production**: ~$200-500/month (depending on usage)
-
-## 🛠️ Management Commands
-
-### CDK Commands
-
+### **Initial Setup** (One-time)
 ```bash
-# Synthesize CloudFormation template
-npx cdk synth
+# 1. Prepare domain
+./scripts/prepare-domain.sh dragon0.com
 
-# Deploy all stacks
-npx cdk deploy --all
+# 2. Deploy domain infrastructure
+./scripts/deploy-domain.sh
 
-# Deploy specific stack
-npx cdk deploy PlutusInfrastructureStack-dev
-
-# Destroy infrastructure
-npx cdk destroy --all
-
-# Show differences
-npx cdk diff
-
-# List all stacks
-npx cdk list
+# 3. Deploy application infrastructure
+./scripts/deploy-app.sh staging
+./scripts/deploy-app.sh prod
 ```
 
-### AWS CLI Commands
+### **Regular Application Updates** (Frequent)
+```bash
+# Only deploy application infrastructure
+./scripts/deploy-app.sh staging
+./scripts/deploy-app.sh prod
+```
+
+### **Domain Changes** (Infrequent)
+```bash
+# Only when adding new domains or subdomains
+./scripts/deploy-domain.sh mydomain.com staging,api,admin
+```
+
+## 🚀 CI/CD Pipeline (Automated Deployment)
+
+For automated deployments from staging to production, you can deploy the CI/CD pipeline:
+
+### **Pipeline Features**
+- **GitHub Integration** - Automatically triggers on code pushes
+- **Docker Build** - Builds and pushes Docker images to ECR
+- **Staging Deployment** - Automatically deploys to staging environment
+- **Manual Approval** - Requires manual approval before production deployment
+- **Production Deployment** - Deploys to production after approval
+
+### **Pipeline Flow**
+```
+Code Push → Build → Deploy to Staging → Manual Approval → Deploy to Production
+```
+
+### **Deploy CI/CD Pipeline**
 
 ```bash
-# Check ECS service status
-aws ecs describe-services --cluster plutus-cluster-dev --services plutus-service-dev
+# Deploy with default settings
+./scripts/deploy-pipeline.sh
 
-# View CloudWatch logs
+# Or with custom configuration
+./scripts/deploy-pipeline.sh dragon0.com staging api your-github-username ai-voice-service main github/oauth-token
+```
+
+### **Setup Requirements**
+
+1. **GitHub OAuth Token**: Create a GitHub personal access token and store it in AWS Secrets Manager
+   ```bash
+   # Store GitHub token in Secrets Manager
+   aws secretsmanager create-secret \
+     --name "github/oauth-token" \
+     --description "GitHub OAuth token for CI/CD pipeline" \
+     --secret-string "your-github-oauth-token"
+   ```
+
+2. **Deploy Infrastructure First**: Ensure staging and production infrastructure are deployed before setting up the pipeline
+   ```bash
+   ./scripts/deploy-app.sh staging
+   ./scripts/deploy-app.sh prod
+   ```
+
+3. **Push Code**: Once the pipeline is deployed, pushing to the monitored branch will trigger the pipeline
+
+### **Pipeline Benefits**
+- ✅ **Automated Testing** - Runs tests before deployment
+- ✅ **Consistent Deployments** - Same process for staging and production
+- ✅ **Rollback Capability** - Easy to rollback to previous versions
+- ✅ **Manual Approval** - Production deployments require approval
+- ✅ **Visibility** - Full deployment history and logs
+
+### **Pipeline Monitoring**
+- View pipeline status in AWS CodePipeline console
+- Monitor build logs in AWS CodeBuild console
+- Track deployment progress in real-time
+
+## 📊 Monitoring and Logs
+
+### CloudWatch Dashboard
+- CPU and memory utilization
+- Request count and response times
+- Error rates and availability
+
+### Application Logs
+```bash
+# View application logs
 aws logs tail /aws/ecs/plutus --follow
-
-# Check load balancer health
-aws elbv2 describe-target-health --target-group-arn <target-group-arn>
 ```
-
-## 🔄 CI/CD Integration
-
-The infrastructure is designed to support CI/CD pipelines. You can extend the CDK code to include:
-
-- **CodePipeline** for automated deployments
-- **CodeBuild** for building and testing
-- **GitHub integration** for source control
-- **Approval gates** for production deployments
 
 ## 🚨 Troubleshooting
 
 ### Common Issues
 
-1. **CDK Bootstrap Required**
-   ```bash
-   npx cdk bootstrap
-   ```
+1. **Domain not found**: Ensure your domain has a Route53 hosted zone
+2. **SSL certificate validation fails**: Check DNS records are properly configured
+3. **ECS service fails to start**: Check Secrets Manager for required API keys
+4. **DNSSEC not working**: Verify KMS key permissions and hosted zone configuration
 
-2. **Insufficient IAM Permissions**
-   - Ensure your AWS user/role has necessary permissions
-   - Check CloudFormation, ECS, VPC, and IAM permissions
-
-3. **Container Health Check Failures**
-   - Verify the `/api/health` endpoint is working
-   - Check application logs in CloudWatch
-
-4. **Secrets Not Loading**
-   - Verify secrets are properly configured in Secrets Manager
-   - Check IAM permissions for secrets access
-
-### Debug Commands
+### Verification Commands
 
 ```bash
-# Check ECS task logs
-aws logs describe-log-groups --log-group-name-prefix /aws/ecs/plutus
+# Check DNSSEC status
+aws route53 get-dnssec-status --hosted-zone-id YOUR_ZONE_ID
 
-# View task definition
-aws ecs describe-task-definition --task-definition plutus-task-def
+# Verify DNSSEC on apex domain
+dig +dnssec dragon0.com
 
-# Check load balancer target health
-aws elbv2 describe-target-health --target-group-arn <arn>
+# Verify DNSSEC on subdomains
+dig +dnssec staging.dragon0.com
+dig +dnssec api.dragon0.com
+
+# Test application endpoints
+curl https://staging.dragon0.com/api/health
+curl https://api.dragon0.com/api/health
 ```
 
-## 📚 Additional Resources
+## 📁 Project Structure
 
-- [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/)
-- [ECS Fargate Best Practices](https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/)
-- [Application Load Balancer Guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/)
-- [CloudWatch Monitoring](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)
+```
+infrastructure/cdk/
+├── bin/
+│   ├── domain-infrastructure.ts    # Domain infrastructure app
+│   ├── plutus-infrastructure.ts    # Application infrastructure app
+│   └── cicd-pipeline.ts            # CI/CD pipeline app
+├── lib/
+│   ├── domain-infrastructure-stack.ts    # Domain stack (Route53, DNSSEC, SSL)
+│   ├── plutus-infrastructure-stack.ts    # Application stack (ECS, ALB, etc.)
+│   └── cicd-pipeline.ts                  # CI/CD pipeline stack
+├── scripts/
+│   ├── prepare-domain.sh           # Domain preparation script
+│   ├── deploy-domain.sh            # Domain infrastructure deployment
+│   ├── deploy-app.sh               # Application infrastructure deployment
+│   ├── deploy-pipeline.sh          # CI/CD pipeline deployment
+│   ├── enable-dnssec.sh            # Enable DNSSEC signing
+│   └── cleanup-domain.sh           # Cleanup domain infrastructure
+└── README.md
+```
 
-## 🤝 Contributing
+## 💰 Cost Optimization
 
-When making changes to the infrastructure:
+- **Domain Infrastructure**: Minimal cost (Route53 hosted zone + DNSSEC)
+- **Application Infrastructure**: Scales with usage (ECS, ALB, data transfer)
+- **Auto-scaling**: Automatically scales down during low usage
+- **Reserved Instances**: Consider for production workloads
 
-1. **Test locally** with `npx cdk synth`
-2. **Review changes** with `npx cdk diff`
-3. **Deploy to dev** first: `./scripts/deploy.sh dev`
-4. **Test thoroughly** before deploying to production
-5. **Update documentation** for any new features
+## 🔄 CI/CD Integration
 
-## 📄 License
+The separated infrastructure allows for different CI/CD strategies:
 
-This infrastructure code is part of the Plutus voice agent project and follows the same license terms. 
+- **Domain changes**: Manual deployment (infrequent, high-risk)
+- **Application changes**: Automated deployment (frequent, low-risk)
+- **Environment promotion**: Staging → Production with same domain infrastructure

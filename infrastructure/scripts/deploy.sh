@@ -12,6 +12,12 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Set default AWS region
+export AWS_DEFAULT_REGION=us-east-1
+
+# Save current directory
+ORIGINAL_DIR=$(pwd)
+
 # Function to print colored output
 print_status() {
     echo -e "${BLUE}[INFO]${NC} $1"
@@ -97,11 +103,11 @@ deploy_infrastructure() {
     
     # Synthesize the CloudFormation template
     print_status "Synthesizing CloudFormation template..."
-    npx cdk synth
+    npx cdk synth -c environment=$environment
     
     # Deploy the stack
     print_status "Deploying CDK stack..."
-    npx cdk deploy PlutusInfrastructureStack-$environment --require-approval never
+    npx cdk deploy PlutusInfrastructureStack-$environment --require-approval never -c environment=$environment
     
     print_success "Infrastructure deployed successfully"
 }
@@ -110,49 +116,19 @@ deploy_infrastructure() {
 store_secrets() {
     local environment=$1
     
-    print_status "Storing secrets in AWS Secrets Manager..."
+    print_status "Managing secrets using dedicated secret management script..."
     
-    SECRET_NAME="plutus-app-secrets-$environment"
-    
-    # Check if secret exists
-    if ! aws secretsmanager describe-secret --secret-id "$SECRET_NAME" &> /dev/null; then
-        print_error "Secret $SECRET_NAME not found. Please ensure the infrastructure is deployed first."
-        return 1
-    fi
-    
-    # Prepare secret values
-    SECRET_VALUES="{}"
-    
-    # Add Google API Key if provided
-    if [ -n "$GOOGLE_GENERATIVE_AI_API_KEY" ]; then
-        SECRET_VALUES=$(echo "$SECRET_VALUES" | jq --arg key "$GOOGLE_GENERATIVE_AI_API_KEY" '.GOOGLE_GENERATIVE_AI_API_KEY = $key')
-        print_success "Google API key will be stored"
+    # Use the dedicated secret management script
+    if [ -f "./scripts/manage-secrets.sh" ]; then
+        "./scripts/manage-secrets.sh" validate
+        if [ $? -ne 0 ]; then
+            print_warning "Some secrets are missing. Creating them now..."
+            "./scripts/manage-secrets.sh" create
+        fi
+        print_success "Secrets validated and ready"
     else
-        print_warning "GOOGLE_GENERATIVE_AI_API_KEY not set. Please set it manually in AWS Secrets Manager."
-    fi
-    
-    # Add Layercode API Key if provided
-    if [ -n "$LAYERCODE_API_KEY" ]; then
-        SECRET_VALUES=$(echo "$SECRET_VALUES" | jq --arg key "$LAYERCODE_API_KEY" '.LAYERCODE_API_KEY = $key')
-        print_success "Layercode API key will be stored"
-    else
-        print_warning "LAYERCODE_API_KEY not set. Please set it manually in AWS Secrets Manager."
-    fi
-    
-    # Add Layercode Webhook Secret if provided
-    if [ -n "$LAYERCODE_WEBHOOK_SECRET" ]; then
-        SECRET_VALUES=$(echo "$SECRET_VALUES" | jq --arg key "$LAYERCODE_WEBHOOK_SECRET" '.LAYERCODE_WEBHOOK_SECRET = $key')
-        print_success "Layercode webhook secret will be stored"
-    else
-        print_warning "LAYERCODE_WEBHOOK_SECRET not set. Please set it manually in AWS Secrets Manager."
-    fi
-    
-    # Update the secret
-    if [ "$SECRET_VALUES" != "{}" ]; then
-        aws secretsmanager put-secret-value \
-            --secret-id "$SECRET_NAME" \
-            --secret-string "$SECRET_VALUES"
-        print_success "Secrets stored successfully"
+        print_error "Secret management script not found. Please ensure manage-secrets.sh exists."
+        exit 1
     fi
 }
 
@@ -230,7 +206,10 @@ show_deployment_info() {
     echo "Next Steps:"
     echo "1. Update your Layercode pipeline webhook URL to: http://$ALB_DNS_NAME/api/agent"
     echo "2. Update your frontend authorize endpoint to: http://$ALB_DNS_NAME/api/authorize"
-    echo "3. Configure secrets in AWS Secrets Manager (secret name: plutus-app-secrets-$environment)"
+    echo "3. Configure secrets in AWS Secrets Manager:"
+    echo "   - layercode/api-key"
+    echo "   - layercode/webhook-secret"
+    echo "   - google/generative-ai-key"
     echo "4. Monitor your deployment in CloudWatch: $DASHBOARD_URL"
     echo ""
 }
@@ -257,36 +236,38 @@ show_usage() {
 # Main deployment function
 main() {
     local environment=$1
-    
-    # Check if environment is provided
-    if [ -z "$environment" ]; then
-        print_error "Environment not specified"
-        show_usage
+
+    # Run orphaned resource check before anything else (from original directory)
+    print_status "Checking for orphaned AWS resources before deployment..."
+    "$(dirname "$0")/orphaned-resource-check.sh"
+    if [ $? -ne 0 ]; then
+        print_error "Orphaned resource check failed or orphaned resources remain. Aborting deployment."
         exit 1
     fi
-    
-    # Validate environment
-    if [[ ! "$environment" =~ ^(dev|staging|prod)$ ]]; then
-        print_error "Invalid environment: $environment"
-        show_usage
+
+    # Validate secrets before any deployment (from original directory)
+    print_status "Validating AWS Secrets Manager and environment before deployment..."
+    node "$(dirname "$0")/../cdk/scripts/pre-deployment-validation.js"
+    if [ $? -ne 0 ]; then
+        print_error "Pre-deployment validation failed. Aborting deployment."
         exit 1
     fi
-    
-    echo "=========================================="
-    echo "Plutus Voice Agent AWS CDK Deployment"
-    echo "Environment: $environment"
-    echo "=========================================="
-    echo ""
-    
+
+    # Move to CDK directory for all deployment steps
+    cd "$(dirname "$0")/../cdk"
+
     check_prerequisites
     check_aws_credentials
     bootstrap_cdk
     install_dependencies
-    deploy_infrastructure "$environment"
+    
+    # Manage secrets BEFORE infrastructure deployment
     store_secrets "$environment"
+    
+    deploy_infrastructure "$environment"
     test_deployment "$environment"
     show_deployment_info "$environment"
-    
+
     print_success "Deployment completed successfully!"
 }
 

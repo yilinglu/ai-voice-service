@@ -92,9 +92,14 @@ describe('Agent API Route', () => {
 
     expect(response.status).toBe(401);
     expect(mockVerifySignature).toHaveBeenCalledWith({
-      payload: expect.any(String),
+      payload: JSON.stringify({
+        text: 'Hello',
+        session_id: 'test-session',
+        turn_id: 'test-turn',
+        type: 'message'
+      }),
       signature: 'test-signature',
-      secret: ''
+      secret: 'test-webhook-secret'
     });
   });
 
