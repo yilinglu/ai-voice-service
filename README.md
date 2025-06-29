@@ -1,217 +1,294 @@
-# AI Voice Service - Plutus
+# Plutus Voice Agent Platform
 
-A production-ready voice agent service built with Next.js, integrating with Layercode for real-time voice AI experiences.
+A modern voice AI platform with clean separation between frontend and backend applications. Built with Next.js, Carbon Design System, and Layercode voice integration.
 
-## 🏗️ Project Structure
+## 🏗️ **Project Structure**
 
 ```
 ai-voice-service/
-├── plutus/                    # Application code
-│   ├── app/                   # Next.js application
-│   ├── lib/                   # Application libraries
-│   ├── Dockerfile             # Container configuration
-│   ├── buildspec.yml          # AWS CodeBuild configuration
-│   └── package.json           # Application dependencies
-├── infrastructure/            # Infrastructure as Code
-│   ├── cdk/                   # AWS CDK configurations
-│   ├── scripts/               # Deployment scripts
-│   └── README.md              # Infrastructure documentation
-└── README.md                  # This file
+├── plutus-server/              # Backend API Server
+│   ├── src/
+│   │   ├── api/
+│   │   │   ├── agent/         # Voice agent webhook
+│   │   │   │   └── index.ts
+│   │   │   ├── authorize/     # Session authorization
+│   │   │   └── health/        # Health check endpoint
+│   │   └── lib/
+│   │       ├── env-validation.ts
+│   │       ├── logger.ts
+│   │       └── request-logger.ts
+│   ├── __tests__/             # Backend tests
+│   ├── package.json           # Backend dependencies
+│   └── Dockerfile             # Backend containerization
+│
+├── plutus-frontend/            # Frontend Application
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── voice/         # Voice UI components
+│   │   │   ├── chat/          # Chat interface
+│   │   │   └── auth/          # Authentication components
+│   │   ├── pages/             # Next.js pages
+│   │   └── styles/            # Sass/CSS styles
+│   ├── package.json           # Frontend dependencies
+│   └── next.config.js         # Frontend configuration
+│
+├── shared/                     # Shared types and utilities
+│   ├── types/                 # TypeScript type definitions
+│   └── utils/                 # Shared utility functions
+│
+├── infrastructure/            # AWS CDK Infrastructure
+│   └── cdk/                   # CDK deployment code
+│
+└── plutus/                    # Legacy combined app (for reference)
 ```
 
-## 🚀 Quick Start
+## 🚀 **Quick Start**
 
-### Local Development
-
-```bash
-# Navigate to the application
-cd plutus
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your API keys
-
-# Start development server
-npm run dev
-```
-
-### Production Deployment
-
-```bash
-# Navigate to CDK infrastructure
-cd infrastructure/cdk
-
-# Install dependencies
-npm install
-
-# Deploy to development environment
-./scripts/deploy.sh dev
-
-# Deploy to production environment
-./scripts/deploy.sh prod
-```
-
-## 📋 Prerequisites
-
-### For Local Development:
+### **Prerequisites**
 - Node.js 18+
 - npm or yarn
-- API keys for Google Gemini and Layercode
+- Docker (for deployment)
 
-### For Production Deployment:
-- AWS CLI configured
-- Node.js 18+ (for CDK)
-- Docker installed
-- GitHub repository
+### **1. Setup Backend Server**
+```bash
+cd plutus-server
+npm install
+npm run dev
+```
+The backend server runs on `http://localhost:3000`
 
-## 🔧 Configuration
+### **2. Setup Frontend Application**
+```bash
+cd plutus-frontend
+npm install
+npm run dev
+```
+The frontend application runs on `http://localhost:3001`
 
-### Environment Variables
+### **3. Environment Configuration**
 
-Create a `.env.local` file in the `plutus` directory:
-
+**Backend (`plutus-server/.env.local`):**
 ```env
-GOOGLE_GENERATIVE_AI_API_KEY=your-google-api-key
-LAYERCODE_API_KEY=your-layercode-api-key
-LAYERCODE_WEBHOOK_SECRET=your-layercode-webhook-secret
+# Layercode Configuration
+LAYERCODE_API_KEY=your_layercode_api_key
+LAYERCODE_WEBHOOK_SECRET=your_webhook_secret
+NEXT_PUBLIC_LAYERCODE_PIPELINE_ID=your_pipeline_id
+
+# Google AI Configuration
+GOOGLE_GENERATIVE_AI_API_KEY=your_google_ai_key
+
+# Server Configuration
+NODE_ENV=development
 ```
 
-### Infrastructure Configuration
+**Frontend (`plutus-frontend/.env.local`):**
+```env
+# Backend API URL
+BACKEND_URL=http://localhost:3000
 
-The CDK infrastructure is configured through TypeScript files in `infrastructure/cdk/`. Key configuration files:
+# Auth0 Configuration
+NEXT_PUBLIC_AUTH0_DOMAIN=your-auth0-domain.auth0.com
+NEXT_PUBLIC_AUTH0_CLIENT_ID=your_auth0_client_id
 
-- `lib/plutus-infrastructure-stack.ts` - Main infrastructure stack
-- `bin/plutus-infrastructure.ts` - CDK app entry point
-- `cdk.json` - CDK configuration
-
-## 🌐 API Endpoints
-
-- **Health Check**: `GET /api/health`
-- **Agent Webhook**: `POST /api/agent`
-- **Authorize**: `POST /api/authorize`
-
-## 🔄 CI/CD Pipeline
-
-The project uses AWS CDK for infrastructure and supports CI/CD integration:
-
-1. **Infrastructure**: Deployed with AWS CDK
-2. **Application**: Containerized with Docker
-3. **Deployment**: ECS Fargate with auto-scaling
-4. **Monitoring**: CloudWatch dashboards and logs
-
-## 📊 Monitoring
-
-- **CloudWatch Dashboard**: Pre-configured monitoring dashboard
-- **ECS Container Insights**: Detailed container performance metrics
-- **Load Balancer Metrics**: Request count, response times, error rates
-- **Auto Scaling**: Scales based on CPU/Memory usage
-
-## 🛠️ Development
-
-### Running Tests
-
-```bash
-cd plutus
-npm test
+# Layercode Pipeline
+NEXT_PUBLIC_LAYERCODE_PIPELINE_ID=your_pipeline_id
 ```
 
-### Building for Production
+## 🎯 **Key Features**
 
+### **Backend Server (plutus-server)**
+- **Voice Agent API**: Webhook endpoint for Layercode voice processing
+- **Session Authorization**: Secure client session management
+- **AI Integration**: Google Gemini for intelligent responses
+- **Enhanced Logging**: Winston-based structured logging
+- **Health Monitoring**: Built-in health checks and validation
+
+### **Frontend Application (plutus-frontend)**
+- **Carbon Design System**: Enterprise-grade UI components
+- **Auth0 SSO**: Secure authentication and user management
+- **Voice Interface**: Prominent microphone controls and status indicators
+- **MIDI Audio Visualization**: Real-time piano roll-style voice visualization
+- **Chat Interface**: Text-based conversation fallback
+- **Responsive Design**: Mobile-friendly interface
+
+### **Shared Components**
+- **Type Definitions**: Consistent interfaces across frontend/backend
+- **Utility Functions**: Reusable helper functions
+
+## 🔧 **Development Workflow**
+
+### **Running Both Applications**
 ```bash
-cd plutus
+# Terminal 1: Backend
+cd plutus-server && npm run dev
+
+# Terminal 2: Frontend  
+cd plutus-frontend && npm run dev
+```
+
+### **Testing**
+```bash
+# Backend tests
+cd plutus-server && npm test
+
+# Frontend tests (future)
+cd plutus-frontend && npm test
+```
+
+### **Linting**
+```bash
+# Backend
+cd plutus-server && npm run lint
+
+# Frontend
+cd plutus-frontend && npm run lint
+```
+
+## 🚢 **Deployment**
+
+### **Separate Deployment Strategy**
+
+**Backend Deployment:**
+```bash
+cd plutus-server
+docker build -t plutus-server .
+# Deploy to your container platform
+```
+
+**Frontend Deployment:**
+```bash
+cd plutus-frontend
 npm run build
+# Deploy to Vercel/Netlify or container platform
 ```
 
-### Docker Build
-
-```bash
-cd plutus
-docker build -t plutus-voice-agent .
-```
-
-### Infrastructure Development
-
+### **AWS CDK Deployment**
+The infrastructure is designed to support separate deployments:
 ```bash
 cd infrastructure/cdk
-
-# Synthesize CloudFormation template
-npx cdk synth
-
-# Show differences
-npx cdk diff
-
-# Deploy to development
-npx cdk deploy PlutusInfrastructureStack-dev
+./scripts/deploy-backend.sh production
+./scripts/deploy-frontend.sh production
 ```
 
-## 🔒 Security Features
+## 🎨 **UI/UX Features**
 
-- **Private Subnets**: Application runs in private subnets
-- **IAM Roles**: Least privilege access for ECS tasks
-- **Secrets Manager**: Encrypted storage for API keys
-- **Security Groups**: Network-level security controls
-- **HTTPS**: Load balancer supports HTTPS (with certificate)
+### **Voice-First Design**
+- **Ultra-low latency** voice interaction
+- **Visual feedback** for voice activity
+- **MIDI-style visualization** of speech patterns
+- **Dual-channel display** (user vs AI voice)
 
-## 💰 Cost Optimization
+### **Carbon Design System**
+- **Accessibility-compliant** components
+- **Consistent design language**
+- **Enterprise-ready** UI patterns
+- **Responsive grid system**
 
-- **Fargate Spot**: Optional spot instances for cost savings
-- **Auto Scaling**: Scales down during low usage
-- **Single NAT Gateway**: Cost-optimized VPC design
-- **Resource Sizing**: Environment-specific resource allocation
+### **Progressive Enhancement**
+- **Works without audio** (accessibility)
+- **Graceful degradation** for unsupported browsers
+- **Mobile-responsive** voice controls
 
-### Estimated Monthly Costs (us-east-1)
-- **Development**: ~$50-100/month
-- **Production**: ~$200-500/month (depending on usage)
+## 📡 **API Integration**
 
-## 📚 Documentation
+### **Backend API Endpoints**
+- `POST /api/agent` - Layercode webhook for voice processing
+- `POST /api/authorize` - Client session authorization
+- `GET /api/health` - Health check and validation
 
-- [Application Documentation](plutus/README.md)
-- [Infrastructure Documentation](infrastructure/README.md)
+### **Frontend API Calls**
+The frontend communicates with the backend via:
+- **API proxying** through Next.js rewrites
+- **Environment-based URLs** for different deployment stages
+- **Error handling** and retry logic
+
+## 🔒 **Security Features**
+
+### **Backend Security**
+- **Webhook signature verification** for Layercode requests
+- **Environment variable validation** at startup
+- **Request logging** with sensitive data masking
+- **AWS Secrets Manager** integration for production
+
+### **Frontend Security**
+- **Auth0 SSO integration** for secure authentication
+- **API request proxying** to prevent CORS issues
+- **Environment variable scoping** (public vs private)
+
+## 🎼 **Audio Visualization**
+
+### **MIDI Piano Roll Features**
+- **Real-time pitch detection** from microphone and AI speech
+- **Piano roll visualization** with time-based scrolling
+- **Dual-channel display** (user in green, AI in blue)
+- **Musical note mapping** (frequency → MIDI notes)
+- **Smooth canvas rendering** with 60fps updates
+
+### **Technical Implementation**
+- **Web Audio API** for microphone capture
+- **Canvas-based rendering** for performance
+- **Real-time pitch detection** using JavaScript libraries
+- **Note quantization** and smoothing options
+
+## 📈 **Monitoring & Analytics**
+
+### **Backend Monitoring**
+- **Structured JSON logging** for CloudWatch
+- **Request/response timing** metrics
+- **Error tracking** with stack traces
+- **Health check endpoints** for load balancers
+
+### **Frontend Analytics**
+- **User interaction tracking** (future)
+- **Voice session metrics** (future)
+- **Performance monitoring** (future)
+
+## 🛠️ **Development Tools**
+
+### **Code Quality**
+- **TypeScript** for type safety
+- **ESLint** for code quality
+- **Jest** for testing
+- **Prettier** for code formatting (future)
+
+### **Development Experience**
+- **Hot reload** for both frontend and backend
+- **Environment validation** with helpful error messages
+- **Comprehensive logging** for debugging
+- **VS Code integration** with recommended extensions
+
+## 🔄 **Migration Guide**
+
+### **From Legacy Plutus App**
+The original `plutus/` directory is preserved for reference. To migrate:
+
+1. **Backend**: Code is already moved to `plutus-server/src/`
+2. **Frontend**: New Carbon-based UI in `plutus-frontend/src/`
+3. **Configuration**: Split environment variables between apps
+4. **Tests**: Backend tests moved to `plutus-server/__tests__/`
+
+## 🤝 **Contributing**
+
+### **Development Setup**
+1. Clone the repository
+2. Install dependencies for both apps
+3. Configure environment variables
+4. Run both applications in development mode
+
+### **Code Standards**
+- Follow TypeScript best practices
+- Use Carbon Design System components
+- Write tests for new features
+- Update documentation for changes
+
+## 📚 **Resources**
+
+- [Carbon Design System](https://carbondesignsystem.com/)
 - [Layercode Documentation](https://docs.layercode.com/)
-- [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/)
+- [Auth0 React SDK](https://auth0.com/docs/libraries/auth0-react)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Google AI SDK](https://ai.google.dev/)
 
-## 🤝 Contributing
+---
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Test infrastructure changes locally with `npx cdk synth`
-6. Submit a pull request
-
-## 🚨 Troubleshooting
-
-### Common Issues
-
-1. **CDK Bootstrap Required**
-   ```bash
-   npx cdk bootstrap
-   ```
-
-2. **Insufficient IAM Permissions**
-   - Ensure your AWS user/role has necessary permissions
-   - Check CloudFormation, ECS, VPC, and IAM permissions
-
-3. **Container Health Check Failures**
-   - Verify the `/api/health` endpoint is working
-   - Check application logs in CloudWatch
-
-### Useful Commands
-
-```bash
-# Check ECS service status
-aws ecs describe-services --cluster plutus-cluster-dev --services plutus-service-dev
-
-# View CloudWatch logs
-aws logs tail /aws/ecs/plutus --follow
-
-# Check load balancer health
-aws elbv2 describe-target-health --target-group-arn <target-group-arn>
-```
-
-## 📄 License
-
-This project is licensed under the MIT License.
+**Ready to build the future of voice AI interfaces!** 🎤✨

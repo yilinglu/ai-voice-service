@@ -165,7 +165,7 @@ export class PlutusInfrastructureStack extends cdk.Stack {
           containerPort: 3000,
           environment: {
             NODE_ENV: environment,
-            NEXT_PUBLIC_LAYERCODE_PIPELINE_ID: 'g0yw0o69',
+            NEXT_PUBLIC_LAYERCODE_PIPELINE_ID: 'e0y2kgye',
           },
           secrets: {
             LAYERCODE_API_KEY: ecs.Secret.fromSecretsManager(
