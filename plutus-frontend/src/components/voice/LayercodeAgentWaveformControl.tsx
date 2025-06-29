@@ -37,19 +37,21 @@ export default function LayercodeAgentWaveformControl({
 }: LayercodeAgentWaveformControlProps) {
   
   const isConnected = status === 'connected';
-  const hasAudioSignal = agentAudioAmplitude > 0.05; // Threshold for meaningful audio
+  const hasAudioSignal = agentAudioAmplitude > 0.005; // Threshold for meaningful audio (very sensitive)
   
-  // Debug logging (reduced frequency)
+  // Debug logging (development only)
   React.useEffect(() => {
-    console.log('🤖 LayercodeAgentWaveformControl Debug:', {
-      status,
-      isConnected,
-      agentAudioAmplitude: agentAudioAmplitude.toFixed(3),
-      hasAudioSignal,
-      isActivePassedToWaveform: isConnected && hasAudioSignal, // ← Fixed logic preview
-      staticPattern
-    });
-  }, [status, isConnected, hasAudioSignal, staticPattern]); // Reduced logging frequency
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🤖 LayercodeAgentWaveformControl Debug:', {
+        status,
+        isConnected,
+        agentAudioAmplitude: agentAudioAmplitude.toFixed(3),
+        hasAudioSignal,
+        isActivePassedToWaveform: isConnected, // ← Should be connected for animation
+        staticPattern
+      });
+    }
+  }, [status, isConnected, hasAudioSignal]); // Further reduced frequency
 
   return (
     <div className={`layercode-agent-waveform ${className}`}>
@@ -90,7 +92,7 @@ export default function LayercodeAgentWaveformControl({
         transition: 'all 0.3s ease'
       }}>
         <SyntheticWaveformControl
-          isActive={isConnected && hasAudioSignal}
+          isActive={isConnected}
           amplitude={agentAudioAmplitude}
           barCount={barCount}
           barHeight={barHeight}

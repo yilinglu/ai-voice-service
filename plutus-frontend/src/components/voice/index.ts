@@ -12,4 +12,5 @@ export { default as MicrophoneControl } from './MicrophoneControl';
 export { default as WaveformControl } from './WaveformControl';
 
 // Combined Control Components
-export { default as MicrophoneWaveformControl } from './MicrophoneWaveformControl'; 
+export { default as MicrophoneWaveformControl } from './MicrophoneWaveformControl';
+export { default as AiHumanVoiceControl } from './AiHumanVoiceControl'; 

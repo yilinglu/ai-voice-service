@@ -49,20 +49,22 @@ export default function LayercodeHumanWaveformControl({
 }: LayercodeHumanWaveformControlProps) {
   
   const isConnected = status === 'connected';
-  const hasAudioSignal = userAudioAmplitude > 0.05; // Threshold for meaningful audio
+  const hasAudioSignal = userAudioAmplitude > 0.005; // Threshold for meaningful audio (very sensitive)
   
-  // Debug logging (reduced frequency)
+  // Debug logging (development only)
   React.useEffect(() => {
-    console.log('🎤 LayercodeHumanWaveformControl Debug:', {
-      status,
-      isConnected,
-      isListening,
-      userAudioAmplitude: userAudioAmplitude.toFixed(3),
-      hasAudioSignal,
-      isActivePassedToWaveform: isConnected && hasAudioSignal, // ← Fixed logic preview
-      staticPattern
-    });
-  }, [status, isConnected, isListening, hasAudioSignal, staticPattern]); // Removed userAudioAmplitude to reduce spam
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎤 LayercodeHumanWaveformControl Debug:', {
+        status,
+        isConnected,
+        isListening,
+        userAudioAmplitude: userAudioAmplitude.toFixed(3),
+        hasAudioSignal,
+        isActivePassedToWaveform: isConnected, // ← Should be connected for animation
+        staticPattern
+      });
+    }
+  }, [status, isConnected, hasAudioSignal]); // Further reduced frequency
 
   const containerStyle = {
     display: 'inline-flex',
@@ -123,7 +125,7 @@ export default function LayercodeHumanWaveformControl({
           
           {/* Synthetic Waveform Visualization */}
           <SyntheticWaveformControl
-            isActive={isConnected && hasAudioSignal}
+            isActive={isConnected}
             amplitude={userAudioAmplitude}
             barCount={barCount}
             barHeight={barHeight}

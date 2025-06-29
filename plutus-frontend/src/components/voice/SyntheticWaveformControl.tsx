@@ -35,8 +35,8 @@ export default function SyntheticWaveformControl({
   // Generate synthetic waveform based on amplitude and pattern
   useEffect(() => {
     if (isActive && amplitude > 0) {
-      // For animated pattern, we need continuous updates
-      if (syntheticPattern === 'animated-wave') {
+      // Patterns that need continuous time-based updates
+      if (syntheticPattern === 'animated-wave' || syntheticPattern === 'frequency-distributed') {
         const interval = setInterval(() => {
           setAnimationTime(prev => {
             const newTime = prev + 1;
@@ -53,7 +53,7 @@ export default function SyntheticWaveformControl({
         
         return () => clearInterval(interval);
       } else {
-        // For static patterns, update only when amplitude changes
+        // For truly static patterns (center-focused), update only when amplitude changes
         const newLevels = generateSyntheticWaveform(amplitude, barCount, syntheticPattern);
         setAudioLevels(newLevels);
       }
@@ -108,16 +108,16 @@ export default function SyntheticWaveformControl({
             height: level > 0 
               ? `${Math.max(parseFloat(getMinHeight()), level * parseFloat(barHeight) / 100)}rem`
               : getMinHeight(),
-            backgroundColor: isActive 
-              ? (level > 10 ? '#198038' : '#e0e0e0') // Green when active and has signal
-              : '#8D8D8D', // Grey when muted
+            backgroundColor: isActive && amplitude > 0.005
+              ? (level > 10 ? '#198038' : '#e0e0e0') // Green when active and meaningful signal
+              : '#8D8D8D', // Grey when muted or low signal
             borderRadius: '0.125rem',
             transition: isActive && syntheticPattern !== 'animated-wave' 
               ? 'height 0.1s ease' 
               : 'none', // Smooth animation for non-animated patterns
-            opacity: isActive 
-              ? (level > 5 ? 1 : 0.5) // Variable opacity when active
-              : 0.7 // Fixed opacity when muted
+            opacity: isActive && amplitude > 0.005
+              ? (level > 5 ? 1 : 0.5) // Variable opacity when active and meaningful signal
+              : 0.7 // Fixed opacity when muted or low signal
           }}
         />
       ))}

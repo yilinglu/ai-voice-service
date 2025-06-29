@@ -10,7 +10,8 @@ export type SyntheticPattern = 'frequency-distributed' | 'center-focused' | 'ani
  */
 export const createFrequencyDistributedWaveform = (
   amplitude: number, 
-  barCount: number
+  barCount: number,
+  time: number = Date.now()
 ): number[] => {
   const baseLevel = amplitude * 100; // Convert 0-1 to 0-100 scale
   const bars: number[] = [];
@@ -18,8 +19,13 @@ export const createFrequencyDistributedWaveform = (
   for (let i = 0; i < barCount; i++) {
     // Simulate frequency distribution (higher frequencies = lower amplitude)
     const frequencyFactor = Math.exp(-i / (barCount * 0.3)); // Exponential decay
-    const variation = (Math.random() - 0.5) * 20; // ±10% random variation
-    const barHeight = Math.max(5, baseLevel * frequencyFactor + variation);
+    
+    // Add time-based variation for more dynamic feel
+    const timeVariation = Math.sin((time * 0.003) + (i * 0.5)) * 0.15; // Subtle time-based wave
+    const randomVariation = (Math.random() - 0.5) * 0.2; // ±10% random variation
+    
+    const totalVariation = (1 + timeVariation + randomVariation);
+    const barHeight = Math.max(5, baseLevel * frequencyFactor * totalVariation);
     bars.push(Math.min(100, barHeight));
   }
   
@@ -84,13 +90,13 @@ export const generateSyntheticWaveform = (
   time?: number
 ): number[] => {
   // Handle very low amplitude - use static pattern
-  if (amplitude < 0.05) {
+  if (amplitude < 0.005) {
     return generateStaticBars(barCount, 'wave');
   }
 
   switch (pattern) {
     case 'frequency-distributed':
-      return createFrequencyDistributedWaveform(amplitude, barCount);
+      return createFrequencyDistributedWaveform(amplitude, barCount, time || Date.now());
     
     case 'center-focused':
       return createCenterFocusedWaveform(amplitude, barCount);
@@ -100,7 +106,7 @@ export const generateSyntheticWaveform = (
     
     default:
       // Fallback to frequency-distributed
-      return createFrequencyDistributedWaveform(amplitude, barCount);
+      return createFrequencyDistributedWaveform(amplitude, barCount, time || Date.now());
   }
 };
 
