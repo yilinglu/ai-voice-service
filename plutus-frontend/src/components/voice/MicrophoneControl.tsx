@@ -5,12 +5,18 @@ interface MicrophoneControlProps {
   isActive: boolean;
   onToggle: () => void;
   onStreamChange?: (stream: MediaStream | null) => void;
+  compact?: boolean; // Use compact mode with fixed heights
+  diameter?: string; // Responsive diameter (e.g., '3.5rem', '2.5rem')
+  visualOnly?: boolean; // If true, only shows visual state without accessing real microphone
 }
 
 export default function MicrophoneControl({ 
   isActive, 
   onToggle, 
-  onStreamChange 
+  onStreamChange,
+  compact = false,
+  diameter = '3.75rem', // Default responsive size (equivalent to 60px at 16px base font)
+  visualOnly = false
 }: MicrophoneControlProps) {
   const [microphoneState, setMicrophoneState] = useState<'initial' | 'listening' | 'muted'>('initial');
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
