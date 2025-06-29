@@ -123,4 +123,5 @@ pids
 .yarn/install-state.gz
 .pnp.*
 
-prod_secrets.env
+*.secrets
+*.secret
