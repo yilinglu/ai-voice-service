@@ -153,6 +153,8 @@ export default function AiHumanVoiceControl({
     }, []),
   });
 
+
+
   // Update conversation metadata when status or amplitudes change
   useEffect(() => {
     setConversationMetadata(prevMetadata => {
