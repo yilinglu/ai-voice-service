@@ -18,7 +18,7 @@ export const createFrequencyDistributedWaveform = (
     ? Math.max(amplitude * 4, 0.015)  // 4x amplification + 1.5% minimum floor
     : amplitude;                      // Normal scaling for higher signals
   
-  const baseLevel = (amplifiedAmplitude * 100) * 3.5; // Convert 0-1 to 0-100 scale + 350% boost
+  const baseLevel = (amplifiedAmplitude * 100) * 8; // Convert 0-1 to 0-100 scale + 800% boost
   const bars: number[] = [];
   
   for (let i = 0; i < barCount; i++) {
@@ -51,7 +51,7 @@ export const createCenterFocusedWaveform = (
     ? Math.max(amplitude * 4, 0.015)  // 4x amplification + 1.5% minimum floor
     : amplitude;                      // Normal scaling for higher signals
   
-  const baseLevel = (amplifiedAmplitude * 100) * 3.5; // Convert 0-1 to 0-100 scale + 350% boost
+  const baseLevel = (amplifiedAmplitude * 100) * 8; // Convert 0-1 to 0-100 scale + 800% boost
   const center = (barCount - 1) / 2;
   
   return Array.from({ length: barCount }, (_, i) => {
@@ -78,7 +78,7 @@ export const createAnimatedWaveform = (
     ? Math.max(amplitude * 4, 0.015)  // 4x amplification + 1.5% minimum floor
     : amplitude;                      // Normal scaling for higher signals
   
-  const baseLevel = (amplifiedAmplitude * 100) * 3.5; // Convert 0-1 to 0-100 scale + 350% boost
+  const baseLevel = (amplifiedAmplitude * 100) * 8; // Convert 0-1 to 0-100 scale + 800% boost
   
   return Array.from({ length: barCount }, (_, i) => {
     // Multiple sine waves for complexity and organic feel

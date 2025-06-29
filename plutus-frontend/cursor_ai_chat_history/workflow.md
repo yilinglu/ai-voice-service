@@ -833,3 +833,43 @@ interface MicrophoneWaveformControlProps {
 - ✅ **Consistent naming** - xxxControl convention
 
 **Should I proceed with this implementation plan?**
+
+Yes, I understand the highlighted text and have a solid understanding of this **ai-voice-service** codebase, particularly the voice visualization components we've been working on.
+
+## **What I Understand About This Codebase:**
+
+### **Architecture:**
+- **plutus-frontend**: Next.js app with voice visualization UI
+- **plutus-server**: Backend API (running on port 3000)
+- **Infrastructure**: AWS CDK deployment setup
+- **Integration**: Layercode SDK for voice processing + custom waveform components
+
+### **Voice Flow:**
+1. **Layercode SDK** handles microphone access and voice processing
+2. **SDK provides**: `userAudioAmplitude` (0-1) and `agentAudioAmplitude` (0-1) 
+3. **Custom components** (`SyntheticWaveformControl`, `LayercodeHumanWaveformControl`) convert amplitude → visual bars
+4. **Current issue**: Audio detection works, but bar heights are visually insufficient
+
+### **Key Components I've Worked With:**
+- `syntheticWaveformUtils.ts` - Core waveform generation logic
+- `SyntheticWaveformControl.tsx` - Visual waveform renderer  
+- `LayercodeHumanWaveformControl.tsx` - Human voice UI wrapper
+- `LayercodeAgentWaveformControl.tsx` - AI agent voice UI wrapper
+
+### **Current State After Our Changes:**
+- ✅ **Color sensitivity fixed**: Raised threshold 0.005→0.01 (less green on background noise)
+- ✅ **3.5x base level boost applied**: More visual prominence
+- ❌ **Still insufficient**: Bars don't rise high enough during actual speech
+
+## **What The Highlighted Text Tells Me:**
+
+> "However the waveform bars are not rising high enough when speech is in progress, audio signal is captured."
+
+This means:
+- **Audio detection**: ✅ Working (Layercode SDK is capturing speech)
+- **Visual scaling**: ❌ Insufficient (the amplitude→bar height conversion needs more boost)
+- **Root cause**: The 3.5x multiplier isn't dramatic enough for your use case
+
+**Do I understand enough to help fix this?** Yes - this is a pure visual scaling parameter that can be adjusted in `syntheticWaveformUtils.ts` without affecting the underlying audio processing.
+
+Would you like me to propose a specific solution to make the bars more prominent during speech?
