@@ -13,12 +13,17 @@ export const createFrequencyDistributedWaveform = (
   barCount: number,
   time: number = Date.now()
 ): number[] => {
-  const baseLevel = amplitude * 100; // Convert 0-1 to 0-100 scale
+  // Smart scaling: amplification + guaranteed minimum floor
+  const amplifiedAmplitude = amplitude < 0.02 
+    ? Math.max(amplitude * 4, 0.015)  // 4x amplification + 1.5% minimum floor
+    : amplitude;                      // Normal scaling for higher signals
+  
+  const baseLevel = (amplifiedAmplitude * 100) * 3.5; // Convert 0-1 to 0-100 scale + 350% boost
   const bars: number[] = [];
   
   for (let i = 0; i < barCount; i++) {
     // Simulate frequency distribution (higher frequencies = lower amplitude)
-    const frequencyFactor = Math.exp(-i / (barCount * 0.3)); // Exponential decay
+    const frequencyFactor = Math.exp(-i / (barCount * 0.6)); // Gentler exponential decay
     
     // Add time-based variation for more dynamic feel
     const timeVariation = Math.sin((time * 0.003) + (i * 0.5)) * 0.15; // Subtle time-based wave
@@ -41,7 +46,12 @@ export const createCenterFocusedWaveform = (
   amplitude: number, 
   barCount: number
 ): number[] => {
-  const baseLevel = amplitude * 100;
+  // Smart scaling: amplification + guaranteed minimum floor
+  const amplifiedAmplitude = amplitude < 0.02 
+    ? Math.max(amplitude * 4, 0.015)  // 4x amplification + 1.5% minimum floor
+    : amplitude;                      // Normal scaling for higher signals
+  
+  const baseLevel = (amplifiedAmplitude * 100) * 3.5; // Convert 0-1 to 0-100 scale + 350% boost
   const center = (barCount - 1) / 2;
   
   return Array.from({ length: barCount }, (_, i) => {
@@ -63,7 +73,12 @@ export const createAnimatedWaveform = (
   barCount: number, 
   time: number = 0
 ): number[] => {
-  const baseLevel = amplitude * 100;
+  // Smart scaling: amplification + guaranteed minimum floor
+  const amplifiedAmplitude = amplitude < 0.02 
+    ? Math.max(amplitude * 4, 0.015)  // 4x amplification + 1.5% minimum floor
+    : amplitude;                      // Normal scaling for higher signals
+  
+  const baseLevel = (amplifiedAmplitude * 100) * 3.5; // Convert 0-1 to 0-100 scale + 350% boost
   
   return Array.from({ length: barCount }, (_, i) => {
     // Multiple sine waves for complexity and organic feel
@@ -90,7 +105,7 @@ export const generateSyntheticWaveform = (
   time?: number
 ): number[] => {
   // Handle very low amplitude - use static pattern
-  if (amplitude < 0.005) {
+  if (amplitude < 0.01) {
     return generateStaticBars(barCount, 'wave');
   }
 

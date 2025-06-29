@@ -49,7 +49,7 @@ export default function LayercodeHumanWaveformControl({
 }: LayercodeHumanWaveformControlProps) {
   
   const isConnected = status === 'connected';
-  const hasAudioSignal = userAudioAmplitude > 0.005; // Threshold for meaningful audio (very sensitive)
+  const hasAudioSignal = userAudioAmplitude > 0.01; // Threshold for meaningful audio (reduced sensitivity for background noise)
   
   // Debug logging (development only)
   React.useEffect(() => {
@@ -60,11 +60,11 @@ export default function LayercodeHumanWaveformControl({
         isListening,
         userAudioAmplitude: userAudioAmplitude.toFixed(3),
         hasAudioSignal,
-        isActivePassedToWaveform: isConnected, // ← Should be connected for animation
+        isActivePassedToWaveform: isConnected,
         staticPattern
       });
     }
-  }, [status, isConnected, hasAudioSignal]); // Further reduced frequency
+  }, [status, isConnected, hasAudioSignal]);
 
   const containerStyle = {
     display: 'inline-flex',

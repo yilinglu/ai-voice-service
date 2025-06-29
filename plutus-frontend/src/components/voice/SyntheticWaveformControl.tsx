@@ -108,15 +108,15 @@ export default function SyntheticWaveformControl({
             height: level > 0 
               ? `${Math.max(parseFloat(getMinHeight()), level * parseFloat(barHeight) / 100)}rem`
               : getMinHeight(),
-            backgroundColor: isActive && amplitude > 0.005
-              ? (level > 10 ? '#198038' : '#e0e0e0') // Green when active and meaningful signal
+            backgroundColor: isActive && amplitude > 0.01
+              ? (level > 5 ? '#198038' : '#4CAF50') // Dark green for higher bars, light green for small bars
               : '#8D8D8D', // Grey when muted or low signal
             borderRadius: '0.125rem',
             transition: isActive && syntheticPattern !== 'animated-wave' 
               ? 'height 0.1s ease' 
               : 'none', // Smooth animation for non-animated patterns
-            opacity: isActive && amplitude > 0.005
-              ? (level > 5 ? 1 : 0.5) // Variable opacity when active and meaningful signal
+            opacity: isActive && amplitude > 0.01
+              ? (level > 8 ? 1 : 0.8) // High opacity for better visibility of small bars
               : 0.7 // Fixed opacity when muted or low signal
           }}
         />

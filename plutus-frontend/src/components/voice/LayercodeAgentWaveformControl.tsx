@@ -37,7 +37,7 @@ export default function LayercodeAgentWaveformControl({
 }: LayercodeAgentWaveformControlProps) {
   
   const isConnected = status === 'connected';
-  const hasAudioSignal = agentAudioAmplitude > 0.005; // Threshold for meaningful audio (very sensitive)
+  const hasAudioSignal = agentAudioAmplitude > 0.01; // Threshold for meaningful audio (reduced sensitivity for background noise)
   
   // Debug logging (development only)
   React.useEffect(() => {
