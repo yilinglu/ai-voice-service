@@ -1,0 +1,32 @@
+[
+    {
+        "@timestamp": "2025-06-29 04:33:35.607",
+        "@message": {
+            "aiResponse": "Okay, here's one for you. Why don't scientists trust atoms? Because they make up everything.\n",
+            "environment": "production",
+            "level": "info",
+            "message": "AI Response:",
+            "service": "plutus-voice-agent",
+            "sessionId": "z7bsu554fqa2jq8llcb6k6k9",
+            "timestamp": "2025-06-29 04:33:35",
+            "turnId": "qkf5es3jwns98s8eo51id7eu",
+            "userMessage": "Tell me another joke.",
+            "version": "1.0.0"
+        }
+    },
+    {
+        "@timestamp": "2025-06-29 04:33:25.615",
+        "@message": {
+            "aiResponse": "Why don't scientists trust atoms? Because they make up everything!\n",
+            "environment": "production",
+            "level": "info",
+            "message": "AI Response:",
+            "service": "plutus-voice-agent",
+            "sessionId": "z7bsu554fqa2jq8llcb6k6k9",
+            "timestamp": "2025-06-29 04:33:25",
+            "turnId": "e5n71sv2vxn6gos7g10ejeag",
+            "userMessage": "Tell me a joke.",
+            "version": "1.0.0"
+        }
+    }
+]

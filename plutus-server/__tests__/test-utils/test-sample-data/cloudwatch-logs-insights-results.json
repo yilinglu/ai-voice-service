@@ -1,0 +1,5320 @@
+[
+    {
+        "@timestamp": "2025-06-30 02:59:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252340000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:59:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252340000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:58:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252280000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:58:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252280000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:58:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252280000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:58:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252280000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:58:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751252280000,
+            "CpuUtilized": 0.2041271122296651,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167564,
+            "NetworkTxBytes": 220,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102502,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:58:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252280000,
+            "CpuUtilized": 0.2041271122296651,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167564,
+            "NetworkTxBytes": 220,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102502
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252220000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252220000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252220000,
+            "CpuUtilized": 0.23430445690949755,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 35,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167531,
+            "NetworkTxBytes": 223,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102475
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751252220000,
+            "CpuUtilized": 0.23430445690949755,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 35,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167531,
+            "NetworkTxBytes": 223,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102475,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252220000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252220000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751252220000,
+            "CpuUtilized": 0.2325023877620697,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123361,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84553,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:57:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252220000,
+            "CpuUtilized": 0.2325023877620697,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123361,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84553
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252160000,
+            "CpuUtilized": 0.2283067754904429,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167500,
+            "NetworkTxBytes": 220,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102445
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252160000,
+            "CpuUtilized": 0.4850261370340983,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 35,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123329,
+            "NetworkTxBytes": 220,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84524
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751252160000,
+            "CpuUtilized": 0.4850261370340983,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 35,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123329,
+            "NetworkTxBytes": 220,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84524,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751252160000,
+            "CpuUtilized": 0.2283067754904429,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167500,
+            "NetworkTxBytes": 220,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102445,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252160000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252160000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252160000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:56:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252160000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252100000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252100000,
+            "CpuUtilized": 0.17921866893768312,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167467,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102418
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751252100000,
+            "CpuUtilized": 0.17921866893768312,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167467,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102418,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252100000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252100000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751252100000,
+            "CpuUtilized": 0.2000058158238729,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 48,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123298,
+            "NetworkTxBytes": 277,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84497,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252100000,
+            "CpuUtilized": 0.2000058158238729,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 48,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123298,
+            "NetworkTxBytes": 277,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84497
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:55:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252100000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751252040000,
+            "CpuUtilized": 0.19196161448955537,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167434,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102389,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252040000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751252040000,
+            "CpuUtilized": 0.2152275745073954,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123259,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84462,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252040000,
+            "CpuUtilized": 0.2152275745073954,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123259,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84462
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252040000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751252040000,
+            "CpuUtilized": 0.19196161448955537,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167434,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102389
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751252040000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:54:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751252040000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251980000,
+            "CpuUtilized": 1.1308340549468994,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 74,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167401,
+            "NetworkTxBytes": 367,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102361
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251980000,
+            "CpuUtilized": 1.1308340549468994,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 74,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167401,
+            "NetworkTxBytes": 367,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102361,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251980000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251980000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251980000,
+            "CpuUtilized": 0.2217069697380066,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123227,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84433
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251980000,
+            "CpuUtilized": 0.2217069697380066,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123227,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84433,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251980000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:53:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251980000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251920000,
+            "CpuUtilized": 3.749181684056918,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 55,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167340,
+            "NetworkTxBytes": 489,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102306,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251920000,
+            "CpuUtilized": 3.749181684056918,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 55,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167340,
+            "NetworkTxBytes": 489,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102306
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251920000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251920000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251920000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251920000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251920000,
+            "CpuUtilized": 0.19804382999738057,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 35,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123195,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84404
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:52:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251920000,
+            "CpuUtilized": 0.19804382999738057,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 35,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123195,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84404,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251860000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251860000,
+            "CpuUtilized": 0.2712503578265508,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 44,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167298,
+            "NetworkTxBytes": 349,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102270,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251860000,
+            "CpuUtilized": 0.2712503578265508,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 44,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167298,
+            "NetworkTxBytes": 349,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102270
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251860000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251860000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251860000,
+            "CpuUtilized": 0.3394524697462718,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123164,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84375
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251860000,
+            "CpuUtilized": 0.3394524697462718,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123164,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84375,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:51:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251860000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251800000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251800000,
+            "CpuUtilized": 0.19122376203536987,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167260,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102236,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251800000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251800000,
+            "CpuUtilized": 0.19122376203536987,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167260,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102236
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251800000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251800000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251800000,
+            "CpuUtilized": 0.20878120720386506,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123131,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84347,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:50:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251800000,
+            "CpuUtilized": 0.20878120720386506,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123131,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84347
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251740000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251740000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251740000,
+            "CpuUtilized": 0.21862263162930806,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167227,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102208
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251740000,
+            "CpuUtilized": 0.19283032774925232,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123098,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84318,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251740000,
+            "CpuUtilized": 0.19283032774925232,
+            "CpuReserved": 512,
+            "MemoryUtilized": 52,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123098,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84318
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251740000,
+            "CpuUtilized": 0.21862263162930806,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167227,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102208,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251740000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:49:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251740000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251680000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251680000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251680000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251680000,
+            "CpuUtilized": 0.19415475606918334,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167194,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102180
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251680000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251680000,
+            "CpuUtilized": 0.19415475606918334,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167194,
+            "NetworkTxBytes": 221,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102180,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251680000,
+            "CpuUtilized": 3.1298175326983135,
+            "CpuReserved": 512,
+            "MemoryUtilized": 51,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 109,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123065,
+            "NetworkTxBytes": 556,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84289,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:48:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251680000,
+            "CpuUtilized": 3.1298175326983135,
+            "CpuReserved": 512,
+            "MemoryUtilized": 51,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 109,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 123065,
+            "NetworkTxBytes": 556,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84289
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251620000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251620000,
+            "CpuUtilized": 0.6012651741504669,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167162,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102152,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251620000,
+            "CpuUtilized": 0.6012651741504669,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167162,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102152
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251620000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-89e19dd-1751090106",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251620000,
+            "CpuUtilized": 0.2716911149024963,
+            "CpuReserved": 512,
+            "MemoryUtilized": 51,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 62,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 122980,
+            "NetworkTxBytes": 348,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84210
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251620000,
+            "CpuUtilized": 0.2716911149024963,
+            "CpuReserved": 512,
+            "MemoryUtilized": 51,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 62,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 122980,
+            "NetworkTxBytes": 348,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84210,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Cluster",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251620000,
+            "TaskCount": 1,
+            "ContainerInstanceCount": 0,
+            "ServiceCount": 1,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "TaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ContainerInstanceCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "ServiceCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:47:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "Timestamp": 1751251620000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:46:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Container",
+            "ContainerName": "web",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Image": "526623580264.dkr.ecr.us-east-1.amazonaws.com/plutus-server:1.0.0-d9b6f36-1751086009",
+            "ContainerKnownStatus": "RUNNING",
+            "Timestamp": 1751251560000,
+            "CpuUtilized": 0.22026908715566,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167129,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102123
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:46:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "bafbb6cb0dde4bf297e0d84259b077e3",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackstagingPlutusServiceTaskDef18BDB0D3",
+            "TaskDefinitionRevision": "19",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751086175269,
+            "PullStoppedAt": 1751086185200,
+            "CreatedAt": 1751086164969,
+            "StartedAt": 1751086196815,
+            "Timestamp": 1751251560000,
+            "CpuUtilized": 0.22026908715566,
+            "CpuReserved": 512,
+            "MemoryUtilized": 62,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 36,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 167129,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 102123,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:46:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Service",
+            "ServiceName": "plutus-service-staging",
+            "ClusterName": "plutus-cluster-staging",
+            "Timestamp": 1751251560000,
+            "DesiredTaskCount": 1,
+            "RunningTaskCount": 1,
+            "PendingTaskCount": 0,
+            "DeploymentCount": 1,
+            "TaskSetCount": 0,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "DesiredTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "RunningTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "PendingTaskCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "DeploymentCount",
+                            "Unit": "Count"
+                        },
+                        {
+                            "Name": "TaskSetCount",
+                            "Unit": "Count"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "@timestamp": "2025-06-30 02:46:00.000",
+        "@message": {
+            "Version": "0",
+            "Type": "Task",
+            "TaskId": "8be464c08d324e1992c084f716bba517",
+            "TaskDefinitionFamily": "PlutusInfrastructureStackprodPlutusServiceTaskDef18AA1F03",
+            "TaskDefinitionRevision": "3",
+            "ServiceName": "plutus-service-prod",
+            "ClusterName": "plutus-cluster-prod",
+            "AccountID": "526623580264",
+            "Region": "us-east-1",
+            "AvailabilityZone": "us-east-1a",
+            "KnownStatus": "RUNNING",
+            "LaunchType": "FARGATE",
+            "PullStartedAt": 1751097690132,
+            "PullStoppedAt": 1751097700916,
+            "CreatedAt": 1751097679694,
+            "StartedAt": 1751097711271,
+            "Timestamp": 1751251560000,
+            "CpuUtilized": 0.22606670061747233,
+            "CpuReserved": 512,
+            "MemoryUtilized": 51,
+            "MemoryReserved": 1024,
+            "StorageReadBytes": 0,
+            "StorageWriteBytes": 0,
+            "NetworkRxBytes": 37,
+            "NetworkRxDropped": 0,
+            "NetworkRxErrors": 0,
+            "NetworkRxPackets": 122929,
+            "NetworkTxBytes": 222,
+            "NetworkTxDropped": 0,
+            "NetworkTxErrors": 0,
+            "NetworkTxPackets": 84163,
+            "EphemeralStorageUtilized": 0.29,
+            "EphemeralStorageReserved": 21.47,
+            "CloudWatchMetrics": [
+                {
+                    "Namespace": "ECS/ContainerInsights",
+                    "Metrics": [
+                        {
+                            "Name": "CpuUtilized",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "CpuReserved",
+                            "Unit": "None"
+                        },
+                        {
+                            "Name": "MemoryUtilized",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "MemoryReserved",
+                            "Unit": "Megabytes"
+                        },
+                        {
+                            "Name": "StorageReadBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "StorageWriteBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkRxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "NetworkTxBytes",
+                            "Unit": "Bytes/Second"
+                        },
+                        {
+                            "Name": "EphemeralStorageUtilized",
+                            "Unit": "Gigabytes"
+                        },
+                        {
+                            "Name": "EphemeralStorageReserved",
+                            "Unit": "Gigabytes"
+                        }
+                    ],
+                    "Dimensions": [
+                        [
+                            "ClusterName"
+                        ],
+                        [
+                            "ServiceName",
+                            "ClusterName"
+                        ],
+                        [
+                            "ClusterName",
+                            "TaskDefinitionFamily"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+]

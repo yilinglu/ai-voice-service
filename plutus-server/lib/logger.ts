@@ -32,7 +32,7 @@ const createLocalLogsDir = () => {
       fs.mkdirSync(logsDir, { recursive: true });
     }
   }
-};
+};  
 
 // Create transports based on environment
 const createTransports = () => {
@@ -42,14 +42,22 @@ const createTransports = () => {
     // Local development: Console + File logging
     createLocalLogsDir();
     
-    // Colorized console for development
+    // Colorized console for development with full structured data
     transports.push(
       new winston.transports.Console({
         format: winston.format.combine(
           winston.format.colorize({ all: true }),
-          winston.format.printf(
-            (info) => `${info.timestamp} ${info.level}: ${info.message}`
-          )
+          winston.format.printf((info) => {
+            const { timestamp, level, message, ...meta } = info;
+            let output = `${timestamp} ${level}: ${message}`;
+            
+            // Add structured data if present
+            if (Object.keys(meta).length > 0) {
+              output += '\n' + JSON.stringify(meta, null, 2);
+            }
+            
+            return output;
+          })
         )
       })
     );
@@ -57,13 +65,13 @@ const createTransports = () => {
     // File transports for local persistence
     transports.push(
       new winston.transports.File({
-        filename: 'logs/error.log',
+        filename: 'logs/plutus-server.error.log',
         level: 'error',
         maxsize: 5242880, // 5MB
         maxFiles: 5,
       }),
       new winston.transports.File({
-        filename: 'logs/combined.log',
+        filename: 'logs/plutus-server.combined.log',
         maxsize: 5242880, // 5MB
         maxFiles: 5,
       })
